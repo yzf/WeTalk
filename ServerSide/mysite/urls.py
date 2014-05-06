@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     #url(r'^admin/', include(admin.site.urls)),
     (r'^register/$', register),
     (r'^login/$', login),
+    (r'^topic_list/$', topic_list),
 )

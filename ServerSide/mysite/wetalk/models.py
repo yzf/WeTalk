@@ -52,3 +52,6 @@ class Topic(models.Model):
     begin_time = models.DateTimeField()# 话题开始时间
     end_time = models.DateTimeField()# 话题结束时间
     spots = models.ManyToManyField('wetalk.Spot')# 该话题的所有槽点
+
+    def __unicode__(self):
+        return r'title: %s' % self.title
