@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
-from mysite.wetalk.models import *
+from models import *
 import json
 
 categories = ('事件', '娱乐', '路过', '怀旧')

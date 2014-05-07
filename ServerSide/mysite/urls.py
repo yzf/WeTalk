@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from mysite.wetalk.views import *
+from wetalk.views import *
 from django.contrib import admin
 admin.autodiscover()
 
