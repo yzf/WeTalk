@@ -22,7 +22,7 @@
 }
 
 .we-talk-style .purtitle {
-    font-size: 1.5em;
+    font-size: 1.2em;
     color: #666;
     font-weight: bolder;
 }
@@ -35,7 +35,7 @@
 /*************************** topic *****************************/
 .we-talk-style .we-talk-style-nav .user-ui-btn {
 	padding-top: 3.3em !important;
-	font-size: 1.2em !important; 
+	font-size: 0.96em !important; 
 	padding-bottom: 0.1em !important;
 }
 
@@ -49,11 +49,12 @@
 }
 
 .we-talk-style .user-add-ui-btn {	
-	font-size: 1.5em !important; 
+	font-size: 1.2em !important; 
 	width: 1.2em;
 	height: 1.2em;
 	top: .3625em;
 }
+
 
 .we-talk-style .user-add-ui-btn:after {
 	background-size: 0.7em 0.7em;
@@ -66,9 +67,25 @@
 	padding: 0;
 }
 
+.we-talk-style .user-footer-ui-btn {	
+	font-size: 1.2em !important; 
+	width: 1.2em;
+	height: 1.2em;
+}
+
+.we-talk-style .user-footer-ui-btn:after {
+	background-size: 0.7em 0.7em;
+	width: 1em;
+	height: 1em;
+	text-align: center;
+	top: 0;
+	left: 0;
+	margin: 0.1em;
+	padding: 0;
+}
 
 .we-talk-style-header {
-	font-size: 1.9em !important;
+	font-size: 1.5em !important;
 }
 
 #channel .we-talk-style-content {
@@ -77,11 +94,11 @@
 }
 
 .we-talk-style .we-talk-style-view ul li a {
-	font-size: 1.1em !important;
+	font-size: 0.8em !important;
 }
 
 .we-talk-style h2 {
-	font-size: 1.6em !important;
+	font-size: 1.28em !important;
 }
 
 .we-talk-style .we-talk-style-view {
@@ -137,18 +154,18 @@
 
 .we-talk-style .time {
 	color: #3e62ad;
-	font-size: 0.8em !important;
+	font-size: 0.65em !important;
 }
 
 .we-talk-style .we-talk-style-list li a p{
-	font-size: 0.9em !important;
+	font-size: 0.8em !important;
 	color: #999 !important;
 	clear: both;
 	padding-top: 0.2em;
 }
 
 .we-talk-style .topic-list li a .topic-tittle{
-    font-size: 1.6em !important;
+    font-size: 1.28em !important;
     color: #698aa6;
     font-weight: bolder;
 }
@@ -159,7 +176,7 @@
 
 /*************************** message *****************************/
 .we-talk-style .we-talk-style-list .h2 {
-	font-size: 1.6em !important;
+	font-size: 1.28em !important;
 	color: #0095d9 !important;
 	display: block;
 	float: left;
@@ -167,7 +184,7 @@
 }
 
 .we-talk-style .we-talk-style-list .time {
-	font-size: 0.8em !important;
+	font-size: 0.65em !important;
 	color: #bbc8e6 !important;
 	float: left;
 	width: 10%;
@@ -193,7 +210,7 @@
 	padding: 0.2em 0.3em !important;
 	margin: 0.1em 0 !important;
 	font-weight: bold;
-	font-size: 1.4em !important;
+	font-size: 1.12em !important;
 }
 
 .we-talk-style .fromMessage {
@@ -212,13 +229,13 @@
 	overflow: visible;
 	margin: 0.2em !important;
 	border-bottom: #AAA solid 1px;
-	height: 8.4em;
+	height: 6.5em;
 }
 
 .we-talk-style .we-talk-style-info img {
 	margin: 0.6em 0.6em 1em 0.6em !important;
-	width: 6.5em !important;
-	height: 6.5em !important;
+	width: 5em !important;
+	height: 5em !important;
 	-webkit-border-radius: 10em !important;
 	-moz-border-radius: 10em !important;
 	float: left;
@@ -227,11 +244,11 @@
 .we-talk-style .we-talk-style-info div {
 	float: left;
 	padding-left: 1em;
-	padding-top: 0.5em;
+	padding-top: 0.2em;
 }
 
 .we-talk-style .we-talk-style-info .h2 {
-	font-size: 1.6em !important;
+	font-size: 1.28em !important;
 	color: #0095d9 !important;
 	padding: 0;
 	margin: 0.5em 0;
@@ -239,12 +256,12 @@
 
 .we-talk-style .we-talk-style-info .information {
 	color: #808080;
-	font-size: 1.3em !important;
+	font-size: 1.04em !important;
 }
 
 .we-talk-style .we-talk-style-info .keyword span {
 	color: #3e62ad;
-	font-size: 1.2em;
+	font-size: 0.96em;
 	padding-left: 1em;
 }
 
@@ -263,7 +280,7 @@
 	margin: 0.4em 0em !important;
 	padding: 0.5em 0.5em 0.5em 1.9em !important;
     line-height: 1.2em;
-    font-size: 1.3em;
+    font-size: 1em;
 }
 
 .we-talk-style-inputbox  input{
@@ -272,21 +289,21 @@
 	padding: 0.2em 0.2em 0.1em 0.2em !important;
 	margin: 0.6em 0.6em 0.5em 0.6em !important;
 	border: solid 1px #AAA;
-    font-size: 1.5em !important;
+    font-size: 1.2em !important;
 }
 
 .we-talk-style .user-inputbox-ui-btn {	
-	font-size: 1.5em !important; 
-	width: 1.9em;
-	height: 1.9em;
+	font-size: 1.2em !important; 
+	width: 1.6em;
+	height: 1.6em;
 	top: .6025em;
 	left: .2em !important;
 }
 
 .we-talk-style .user-inputbox-ui-btn:after {
 	background-size: 0.7em 0.7em;
-	width: 1.7em;
-	height: 1.7em;
+	width: 1.35em;
+	height: 1.35em;
 	text-align: center;
 	top: 0;
 	left: 0;
@@ -301,25 +318,25 @@
 }
 
     .we-talk-style .setting .logout {
-        width: 95%;
+        width: 90%;
         margin: 2em auto;
     }
 
         .we-talk-style .setting .logout a {
-            font-size: 1.5em !important;
+            font-size: 1.2em !important;
         }
 
 .we-talk-style  .setting ul li a {
 	padding: 1em 0.6em;
 	margin: 0 1em;
-	font-size: 1.5em !important;
+	font-size: 1.2em !important;
 	color: #808080 !important;
 }
 
 .we-talk-style .setting-info {	
-	width: 70%;
+	width: 93%;
 	margin-top: 1em;
-	margin-left: 1em;
+	margin-left: 3%;
 }
 
 .we-talk-style .setting-info input {
@@ -328,8 +345,8 @@
 	border-left: none;
 	border-bottom: 1px solid #698aa6;
 	background: #f9f9f9;
-	padding: 0.2em;
-	font-size: 1.6em !important;
+	padding: 0em 0.4em;
+	font-size: 1.28em !important;
 	color: #698AA6;
 }
 
@@ -352,12 +369,12 @@
 
 .we-talk-style-login-page .loginbox input{
 	padding: 0.5em !important;
-	font-size: 1.5em !important;
+	font-size: 1.2em !important;
 }
 
 .we-talk-style-login-page .loginbox .inputbox-button{
 	padding: 0.5em !important;
-	font-size: 1.5em !important;
+	font-size: 1.2em !important;
 }
 
 
@@ -404,18 +421,28 @@
     }
 
 .we-talk-style .we-talk-style-itemshow .talker-info img  {
-    width: 4em;
-    height: 4em;    
+    width: 3.2em;
+    height: 3.2em;    
 	-webkit-border-radius: 5em !important;
 	-moz-border-radius: 5em !important;
     float: left;
 }
 
 .we-talk-style .h3 {
-    font-size: 1em !important;
+    font-size: 0.8em !important;
 	color: #0095d9 !important;
 	padding: 0;
 	margin: 0.5em 0;
 }
 
 /*************************** talk *****************************/
+/*************************** createSplitslot *****************************/
+.we-talk-style .icon-box {
+    width: 93%;
+    padding-left: 3%;
+}
+
+    .we-talk-style .icon-box .user-icon-ui-btn {
+        margin-left: 1%;
+    }
+/*************************** createSplitslot *****************************/
