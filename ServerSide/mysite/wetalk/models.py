@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 # 用户类
 class User(models.Model):
-    icon = models.CharField(max_length=64)# 图片名
+    icon = models.ForeignKey('wetalk.Image')# 图片名
     name = models.CharField(max_length=64)# 昵称
     intro = models.TextField()# 简介
     username = models.CharField(max_length=32,unique=True)# 账号

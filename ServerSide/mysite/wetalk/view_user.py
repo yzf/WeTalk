@@ -12,6 +12,7 @@ def register(request):
         user = User()
         user.username = request.POST['username']
         user.password = request.POST['password']
+        user.icon = Image.objects.get(id=1)
         if user.username.strip() == '' or user.password.strip() == '':
             raise # 账号或者密码为空
         user.save()
@@ -27,7 +28,7 @@ def login(request):
     try:
         user = User.objects.get(username=request.POST['username'], \
                                 password=request.POST['password'])
-        request.session['id'] = user.id;
+        request.session['id'] = user.id
         data['status'] = 1
         data['info'] = 'login successed'
     except Exception, e:
@@ -38,7 +39,7 @@ def login(request):
 def user(request):
     data = {'status': 0, 'info': 'error'}
     try:
-        user_id = request.POST['id']
+        user_id = int(request.POST['id'])
         #user_id = 1
         user = User.objects.filter(id=user_id)
         data['status'] = 1
