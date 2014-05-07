@@ -17,7 +17,7 @@ def topic_list(request):
         data['status'] = 1
         data['info'] = 'ok'
         data['length'] = tp_list.count()
-        data['data'] = json.loads(serializers.serialize("json", tp_list))
-    except:
-        pass
+        data['data'] = json.loads(serializers.serialize('json', tp_list))
+    except Exception, e:
+        print e
     return HttpResponse(json.dumps(data))

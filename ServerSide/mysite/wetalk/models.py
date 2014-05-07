@@ -24,6 +24,9 @@ class Message(models.Model):
     is_read = models.BooleanField(default=False)# 是否已读
     content = models.TextField()# 内容
 
+    def __unicode__(self):
+        return u'content: %s' % self.content
+
 
 
 # 评论类
@@ -32,14 +35,22 @@ class Comment(models.Model):
     create_time = models.DateTimeField()# 发表时间
     content = models.TextField()# 内容
 
+    def __unicode__(self):
+        return u'content: %s' % self.content
+
 
 
 # 槽点类
 class Spot(models.Model):
     creator = models.ForeignKey('wetalk.User')# 创建者，外键约束
     create_time = models.DateTimeField()# 创建时间
+    title = models.CharField(max_length=128)# 标题
     content = models.TextField()# 内容
     comments = models.ManyToManyField('wetalk.Comment')# 槽点的所有评论
+    up = models.IntegerField()# 赞数量
+
+    def __unicode__(self):
+        return u'title: %s' % self.title
 
 
 
@@ -54,4 +65,4 @@ class Topic(models.Model):
     spots = models.ManyToManyField('wetalk.Spot')# 该话题的所有槽点
 
     def __unicode__(self):
-        return r'title: %s' % self.title
+        return u'title: %s' % self.title

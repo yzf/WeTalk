@@ -12,4 +12,6 @@ urlpatterns = patterns('',
     (r'^register/$', register),
     (r'^login/$', login),
     (r'^topic_list/$', topic_list),
+    (r'^spot_list/$', spot_list),
+    (r'^spot/$', spot),
 )
