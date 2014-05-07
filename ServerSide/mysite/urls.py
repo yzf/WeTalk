@@ -9,12 +9,12 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     #url(r'^admin/', include(admin.site.urls)),
+    (r'^test/$', test),
     (r'^register/$', register),
     (r'^login/$', login),
     (r'^user/$', user),
     (r'^topic_list/$', topic_list),
     (r'^topic_add/$', topic_add),
     (r'^spot_list/$', spot_list),
-    (r'^spot/$', spot),
     (r'^comment_list/$', comment_list),
 )

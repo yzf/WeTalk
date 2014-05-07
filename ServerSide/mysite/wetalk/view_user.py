@@ -41,10 +41,11 @@ def user(request):
     try:
         user_id = int(request.POST['id'])
         #user_id = 1
-        user = User.objects.filter(id=user_id)
+        user = User.objects.get(id=user_id)
+        data['data'] = user.toJsonFormat()
+
         data['status'] = 1
         data['info'] = 'ok'
-        data['data'] = json.loads(serializers.serialize('json', user))
     except Exception, e:
         print e
     return HttpResponse(json.dumps(data))

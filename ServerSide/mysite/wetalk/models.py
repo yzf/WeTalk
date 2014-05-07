@@ -15,6 +15,16 @@ class User(models.Model):
         return u'name: %s, username: %s, password: %s, interest: %s' % \
                 (self.name, self.username, self.password, self.interest)
 
+    def toJsonFormat(self):
+        ret = {}
+        ret['id'] = self.id
+        ret['icon'] = self.icon.toJsonFormat()
+        ret['name'] = self.name
+        ret['intro'] = self.intro
+        ret['username'] = self.username
+        ret['interest'] = self.interest
+        return ret
+
 
 
 # 私信
@@ -36,15 +46,43 @@ class Image(models.Model):
     def __unicode__(self):
         return u'url: %s' % self.url
 
+    def toJsonFormat(self):
+        ret = {}
+        ret['id'] = self.id
+        ret['url'] = self.url
+        return ret
 
-# 评论类
-class Comment(models.Model):
-    creator = models.ForeignKey('wetalk.User')# 评论者，外键约束
-    create_time = models.DateTimeField()# 发表时间
-    content = models.TextField()# 内容
+
+
+# 话题类
+class Topic(models.Model):
+    creator = models.ForeignKey('wetalk.User')# 创建者，外键约束
+    create_time = models.DateTimeField()# 创建时间
+    category = models.CharField(max_length=32)# 类别
+    title = models.CharField(max_length=128,unique=True)# 标题
+    begin_time = models.DateTimeField()# 话题开始时间
+    end_time = models.DateTimeField()# 话题结束时间
+    spots = models.ManyToManyField('wetalk.Spot')# 该话题的所有槽点
 
     def __unicode__(self):
-        return u'content: %s' % self.content
+        return u'title: %s' % self.title
+
+    def toJsonFormat(self, show_spot=False, show_comment=False):
+        ret = {}
+        ret['id'] = self.id
+        ret['creator'] = self.creator.toJsonFormat()
+        ret['create_time'] = str(self.create_time)
+        ret['category'] = self.category
+        ret['title'] = self.title
+        ret['begin_time'] = str(self.begin_time)
+        ret['end_time'] = str(self.end_time)
+        ret['spots'] = []
+        for sp in self.spots.all():
+            if show_spot:
+                ret['spots'].append(sp.toJsonFormat(show_comment))
+            else:
+                ret['spots'].append(sp.id)
+        return ret
 
 
 
@@ -61,17 +99,42 @@ class Spot(models.Model):
     def __unicode__(self):
         return u'title: %s' % self.title
 
+    def toJsonFormat(self, show_comment=False):
+        ret = {}
+        ret['id'] = self.id
+        ret['creator'] = self.creator.toJsonFormat()
+        ret['create_time'] = str(self.create_time)
+        ret['title'] = self.title
+        ret['imgs'] = []
+        for img in self.imgs.all():
+            ret['imgs'].append(img.toJsonFormat())
+        ret['content'] = self.content
+        ret['comments'] = []
+        for cm in self.comments.all():
+            if show_comment:
+                ret['comments'].append(cm.toJsonFormat())
+            else:
+                ret['comments'].append(cm.id)
+        ret['up'] = self.up
+        return ret
 
-
-# 话题类
-class Topic(models.Model):
-    creator = models.ForeignKey('wetalk.User')# 创建者，外键约束
-    create_time = models.DateTimeField()# 创建时间
-    category = models.CharField(max_length=32)# 类别
-    title = models.CharField(max_length=128,unique=True)# 标题
-    begin_time = models.DateTimeField()# 话题开始时间
-    end_time = models.DateTimeField()# 话题结束时间
-    spots = models.ManyToManyField('wetalk.Spot')# 该话题的所有槽点
+# 评论类
+class Comment(models.Model):
+    creator = models.ForeignKey('wetalk.User')# 评论者，外键约束
+    create_time = models.DateTimeField()# 发表时间
+    content = models.TextField()# 内容
 
     def __unicode__(self):
-        return u'title: %s' % self.title
+        return u'content: %s' % self.content
+
+    def toJsonFormat(self):
+        ret = {}
+        ret['id'] = self.id
+        ret['creator'] = self.creator.toJsonFormat()
+        ret['create_time'] = str(self.create_time)
+        ret['content'] = self.content
+        return ret
+
+
+
+

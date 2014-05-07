@@ -13,11 +13,15 @@ def topic_list(request):
         cg = categories[int(request.POST['category'])]
         start = int(request.POST['start'])
         end = int(request.POST['end'])
+        #cg = categories[0]
+        #start = 0
+        #end = 5
         tp_list = Topic.objects.filter(category=cg).order_by('id')[start:end]
+        data['data'] = []
+        for tp in tp_list:
+            data['data'].append(tp.toJsonFormat())
         data['status'] = 1
         data['info'] = 'ok'
-        data['length'] = tp_list.count()
-        data['data'] = json.loads(serializers.serialize('json', tp_list))
     except Exception, e:
         print e
     return HttpResponse(json.dumps(data))
