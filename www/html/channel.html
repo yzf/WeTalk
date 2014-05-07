@@ -26,33 +26,30 @@
         <div data-role="header" data-position="fixed" class="we-talk-style we-talk-style-header">
             <a href="javascript:void(0):" data-role="button" data-icon="plus" data-iconpos="notext" class="user-add-ui-btn">add</a>
             <h1>话题</h1>
-            <a href="javascript:void(0):" data-role="button" data-icon="search" data-iconpos="notext" class="user-add-ui-btn">Search</a>
+            <a href="javascript:void(0):" data-role="button" data-icon="search" data-iconpos="notext" class="user-add-ui-btn" id="search_button">Search</a>
+			<input type="text" id="search_text">
         </div>
 
         <div data-role="content" class="we-talk-style we-talk-style-content clear">
             <div class="we-talk-style-view clear" data-role="navbar">
-                <ul>
+                <ul id="listV">
                     <li>
-                        <a href="javascript:void(0):">事件</a>
+                        <a href="javascript:void(0):" category="0">事件</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0):">娱乐</a>
+                        <a href="javascript:void(0):" category="1">娱乐</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0):">路过</a>
+                        <a href="javascript:void(0):" category="2">路过</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0):">怀旧</a>
+                        <a href="javascript:void(0):" category="3">怀旧</a>
                     </li>
                 </ul>
             </div>
 
              <ul id="topicList" data-role="listview" data-inset="true" class="we-talk-style-list clear topic-list">
-			 
-                <li><a href="#spitslot"><span class="topic-tittle">马航事件</span><span class="ui-li-count">25</span>
-                    <br />
-                    <span class="time">from 13-12-12 to 13-12-12</span>
-                </a></li>
+
             </ul>
 			
 			<a href="javascript:void(0);" id="logout" class="inputbox-button" data-role="button" data-inline="false" data-theme="b">加载更多</a>

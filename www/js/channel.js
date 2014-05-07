@@ -9,13 +9,12 @@ $(document).ready(function() {
         };
         var requestUrl = "http://192.168.1.186:8000/topic_list/";
         var cb = function (result, requestData) {
-        //    alert(result.status);
 			cur += length;
 			if (result.status == "1" || result.status == 1) {
 				var html = [];
 				for(var i = 0; i < result.length; i++) {
 					//result.data[i] = eval(result.data[i]);
-					html.push('<li><a href="spitslot.html&topicID=' + result.data[i].pk + '">');
+					html.push('<li><a href="spitslot.html?topicID=' + result.data[i].pk + '" rel="external">');
 						html.push('<span class="topic-tittle">' + result.data[i].fields.title + '</span>');
 						html.push('<span class="ui-li-count">' + result.data[i].fields.spots.length + '</span>');
 						html.push('<br />');
@@ -24,8 +23,8 @@ $(document).ready(function() {
 				}
 				
 				html = html.join("");	// 转换成一个字符串
-				alert(html);
 				$("#topicList").append(html);
+				$("#topicList").listview('refresh');
 			}
 			else {
 				// 失败的情况，弹框显示
@@ -36,5 +35,39 @@ $(document).ready(function() {
         simpleJs.ajaxPost(requestUrl, requestData, cb);
 	};
 	
-	getMessage(0);
+	var startPage = 0;
+	
+	// 第一次加载默认
+	getMessage(startPage);
+	
+	$("#listV li a").bind('touchstart mousedown', function () {
+		$("#topicList").empty();
+		getMessage(parseInt($(this).attr("category")));
+		startPage = parseInt($(this).attr("category"));
+	});
+	
+	$("#topicList").bind('swipeleft', function() {
+		if(startPage >= 0) {
+			startPage--;
+			$("#topicList").empty();
+			getMessage(startPage);
+		}
+	});
+	
+	$("#topicList").bind('swiperight', function() {
+		if(startPage < 4) {
+			startPage++;
+			$("#topicList").empty();
+			getMessage(startPage);
+		}
+	});
 });
+
+$(doucument).ready(function() {
+	$("#search_button").bind('touchstart mousedown', function() {
+		$("#search_text").toggle();
+	});
+});
+
+
+

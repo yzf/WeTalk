@@ -10,6 +10,10 @@
 	clear: both;
 }
 
+#search_text {
+	display: none;
+}
+
 .we-talk-style .title {
     margin: 0.8em 0 0.8em 0.8em;
     font-size: 1.5em;
