@@ -4,7 +4,7 @@
             username : $("#registerAccountInput").val(),
             password : $("#registerPasswordInput").val()
         };
-        var requestUrl = "http://192.168.0.85:8000/register/";
+        var requestUrl = "http://192.168.1.186:8000/register/";
         var cb = function (result, requestData) {
             alert(result.status);
 
@@ -18,7 +18,7 @@
             username: $("#loginAccountInput").val(),
             password: $("#loginPasswordInput").val()
         };
-        var requestUrl = "http://192.168.0.85:8000/login/";
+        var requestUrl = "http://192.168.1.186:8000/login/";
         var cb = function (result, requestData) {         
             alert(result.status);
             //if (result.status == "1" || result.status == 1) {
