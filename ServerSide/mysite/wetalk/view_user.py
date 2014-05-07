@@ -1,6 +1,7 @@
 # encoding=UTF-8
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core import serializers
 from mysite.wetalk.models import *
 import json
 
@@ -16,8 +17,8 @@ def register(request):
         user.save()
         data['status'] = 1
         data['info'] = 'register successed'
-    except:
-        pass
+    except Exception, e:
+        print e
     return HttpResponse(json.dumps(data))
 
 # 登陆
@@ -29,8 +30,20 @@ def login(request):
         request.session['id'] = user.id;
         data['status'] = 1
         data['info'] = 'login successed'
-    except:
-        pass
+    except Exception, e:
+        print e
     return HttpResponse(json.dumps(data))
 
-
+# 根据用户id，获取个人信息
+def user(request):
+    data = {'status': 0, 'info': 'error'}
+    try:
+        user_id = request.POST['id']
+        #user_id = 1
+        user = User.objects.filter(id=user_id)
+        data['status'] = 1
+        data['info'] = 'ok'
+        data['data'] = json.loads(serializers.serialize('json', user))
+    except Exception, e:
+        print e
+    return HttpResponse(json.dumps(data))

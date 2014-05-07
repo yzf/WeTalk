@@ -29,6 +29,14 @@ class Message(models.Model):
 
 
 
+# 图片
+class Image(models.Model):
+    url = models.CharField(max_length=128,unique=True)
+
+    def __unicode__(self):
+        return u'url: %s' % self.url
+
+
 # 评论类
 class Comment(models.Model):
     creator = models.ForeignKey('wetalk.User')# 评论者，外键约束
@@ -44,7 +52,8 @@ class Comment(models.Model):
 class Spot(models.Model):
     creator = models.ForeignKey('wetalk.User')# 创建者，外键约束
     create_time = models.DateTimeField()# 创建时间
-    title = models.CharField(max_length=128)# 标题
+    title = models.CharField(max_length=128,unique=True)# 标题
+    imgs = models.ManyToManyField('wetalk.Image')# 图片
     content = models.TextField()# 内容
     comments = models.ManyToManyField('wetalk.Comment')# 槽点的所有评论
     up = models.IntegerField()# 赞数量
@@ -59,7 +68,7 @@ class Topic(models.Model):
     creator = models.ForeignKey('wetalk.User')# 创建者，外键约束
     create_time = models.DateTimeField()# 创建时间
     category = models.CharField(max_length=32)# 类别
-    title = models.CharField(max_length=128)# 标题
+    title = models.CharField(max_length=128,unique=True)# 标题
     begin_time = models.DateTimeField()# 话题开始时间
     end_time = models.DateTimeField()# 话题结束时间
     spots = models.ManyToManyField('wetalk.Spot')# 该话题的所有槽点
