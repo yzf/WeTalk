@@ -67,7 +67,7 @@ class Topic(models.Model):
     def __unicode__(self):
         return u'title: %s' % self.title
 
-    def toJsonFormat(self, show_spot=False, show_comment=False):
+    def toJsonFormat(self, show_spot=False, start=0, end=0):
         ret = {}
         ret['id'] = self.id
         ret['creator'] = self.creator.toJsonFormat()
@@ -76,12 +76,12 @@ class Topic(models.Model):
         ret['title'] = self.title
         ret['begin_time'] = str(self.begin_time)
         ret['end_time'] = str(self.end_time)
-        ret['spots'] = []
-        for sp in self.spots.all():
-            if show_spot:
-                ret['spots'].append(sp.toJsonFormat(show_comment))
-            else:
-                ret['spots'].append(sp.id)
+        ret['spots_count'] = self.spots.count()
+        if show_spot:
+            ret['spots'] = []
+            for sp in self.spots.all()[start:end]:
+                ret['spots'].append(sp.toJsonFormat())
+
         return ret
 
 
@@ -99,7 +99,7 @@ class Spot(models.Model):
     def __unicode__(self):
         return u'title: %s' % self.title
 
-    def toJsonFormat(self, show_comment=False):
+    def toJsonFormat(self, show_comment=False, start=0, end=0):
         ret = {}
         ret['id'] = self.id
         ret['creator'] = self.creator.toJsonFormat()
@@ -109,13 +109,13 @@ class Spot(models.Model):
         for img in self.imgs.all():
             ret['imgs'].append(img.toJsonFormat())
         ret['content'] = self.content
-        ret['comments'] = []
-        for cm in self.comments.all():
-            if show_comment:
-                ret['comments'].append(cm.toJsonFormat())
-            else:
-                ret['comments'].append(cm.id)
         ret['up'] = self.up
+        ret['comments_count'] = self.comments.count()
+        if show_comment:
+            ret['comments'] = []
+            for cm in self.comments.all()[start:end]:
+                ret['comments'].append(cm.toJsonFormat())
+
         return ret
 
 # 评论类

@@ -32,10 +32,10 @@ def comment_list(request):
 
         #spot_id = 1
         #start = 0
-        #end = 4
+        #end = 1
 
         sp = Spot.objects.get(id=spot_id)
-        data['data'] = sp.toJsonFormat(show_comment=True)
+        data['data'] = sp.toJsonFormat(show_comment=True, start=start, end=end)
 
         data['status'] = 1
         data['info'] = 'ok'

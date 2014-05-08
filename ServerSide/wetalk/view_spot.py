@@ -17,6 +17,7 @@ def spot_list(request):
         如果成功，则
             {'status': 1,
              'info': 'ok',
+             'count': 该话题的总槽点个数,
              'data': [槽点们]}
         否则
             {'status': 0,
@@ -32,8 +33,9 @@ def spot_list(request):
 
         #topic_id = 1
         #start = 0
-        #end = 4
+        #end = 2
 
+        data['count'] = Topic.objects.get(id=topic_id).spots.count()
         sp_list = Topic.objects.get(id=topic_id).spots.all()[start:end]
         data['data'] = []
         for sp in sp_list:

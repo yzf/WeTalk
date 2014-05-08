@@ -18,6 +18,7 @@ def topic_list(request):
         如果成功，则
             {'status': 1,
              'info': 'ok',
+             'count': 该类型的总话题个数
              'data': [话题们]}
         否则
             {'status': 0,
@@ -32,7 +33,8 @@ def topic_list(request):
         end = int(request.POST['end'])
         #cg = categories[0]
         #start = 0
-        #end = 5
+        #end = 1
+        data['count'] = Topic.objects.filter(category=cg).count()
         tp_list = Topic.objects.filter(category=cg).order_by('id')[start:end]
         data['data'] = []
         for tp in tp_list:
