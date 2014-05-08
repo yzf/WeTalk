@@ -10,18 +10,18 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     #url(r'^admin/', include(admin.site.urls)),
-    (r'^test/$', test),
+    (r'^test/', test),
     # 与用户相关
-    (r'^register/$', register),
-    (r'^login/$', login),
-    (r'^user/$', user),
+    (r'^register/', register),
+    (r'^login/', login),
+    (r'^user/', user),
     # 与话题相关
-    (r'^topic_list/$', topic_list),
-    (r'^topic_add/$', topic_add),
+    (r'^topic_list/', topic_list),
+    (r'^topic_add/', topic_add),
     # 与槽点相关
-    (r'^spot_list/$', spot_list),
+    (r'^spot_list/', spot_list),
     # 与评论相关
-    (r'^comment_list/$', comment_list),
+    (r'^comment_list/', comment_list),
     # 与图片相关
-    (r'^image_upload/$', image_upload),
+    (r'^image_upload/', image_upload),
 )

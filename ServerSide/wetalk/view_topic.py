@@ -11,9 +11,9 @@ def topic_list(request):
     获取话题
 
     参数:
-        request.POST['category']: 类型的下标
-        request.POST['start']: 区间的开始值
-        request.POST['end']: 区间的结束值
+        request.REQUEST['category']: 类型的下标
+        request.REQUEST['start']: 区间的开始值
+        request.REQUEST['end']: 区间的结束值
     返回值:
         如果成功，则
             {'status': 1,
@@ -28,9 +28,9 @@ def topic_list(request):
     '''
     data = {'status': 0, 'info': 'error'}
     try:
-        cg = categories[int(request.POST['category'])]
-        start = int(request.POST['start'])
-        end = int(request.POST['end'])
+        cg = categories[int(request.REQUEST['category'])]
+        start = int(request.REQUEST['start'])
+        end = int(request.REQUEST['end'])
         #cg = categories[0]
         #start = 0
         #end = 1

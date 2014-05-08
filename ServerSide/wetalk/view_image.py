@@ -2,14 +2,30 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
-from models import *
-from PIL import Image
-import json
+from PIL import Image as PILImage
+from wetalk.models import Image
+import json, string, random
 
 def image_upload(request):
     data = {'status': 0, 'info': 'error'}
     try:
-        img = request.FILES['image']
+        size = 200, 200
+        img_name = ''.join([random.choice(string.ascii_letters + string.digits) \
+                           for i in range(15)])
+
+        upload_img = request.FILES['image']
+        img = PILImage.open(upload_img)
+        img.thumbnail(size, PILImage.ANTIALIAS)
+        img_url = 'resource/images/' + img_name + '.png'
+        img.save(img_url, 'png')
+
+        image = Image()
+        image.url = img_url
+        image.save()
+
+        data['status'] = 1
+        data['info'] = 'ok'
+        data['url'] = img_url
     except Exception as e:
         data['info'] = e.__str__().strip('"').strip("'")
         print e

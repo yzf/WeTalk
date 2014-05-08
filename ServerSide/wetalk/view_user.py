@@ -10,8 +10,8 @@ def register(request):
     注册新用户
 
     参数:
-        request.POST['username']: 账号
-        request.POST['password']: 密码
+        request.REQUEST['username']: 账号
+        request.REQUEST['password']: 密码
     返回值:
         如果成功，则返回
             {'status': 1,
@@ -25,8 +25,8 @@ def register(request):
     data = {'status': 0, 'info': 'error'}
     try:
         user = User()
-        user.username = request.POST['username']
-        user.password = request.POST['password']
+        user.username = request.REQUEST['username']
+        user.password = request.REQUEST['password']
         user.icon = Image.objects.get(id=1)
         if user.username.strip() == '' or user.password.strip() == '':
             raise # 账号或者密码为空
@@ -46,8 +46,8 @@ def login(request):
     登陆系统
 
     参数:
-        request.POST['username']: 账号
-        request.POST['password']: 密码
+        request.REQUEST['username']: 账号
+        request.REQUEST['password']: 密码
     返回值:
         如果成功，则返回
             {'status': 1,
@@ -60,8 +60,8 @@ def login(request):
     '''
     data = {'status': 0, 'info': 'error'}
     try:
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.REQUEST['username']
+        password = request.REQUEST['password']
         #username = r'admin@admin.com'
         #password = r'1'
         user = User.objects.get(username=username, password=password)
@@ -80,7 +80,7 @@ def user(request):
     获取个人信息
 
     参数:
-        request.POST['id']: 用户的id
+        request.REQUEST['id']: 用户的id
     返回值:
         没有任何异常，则
             {'status': 1,
@@ -92,7 +92,7 @@ def user(request):
     '''
     data = {'status': 0, 'info': 'error'}
     try:
-        user_id = int(request.POST['id'])
+        user_id = int(request.REQUEST['id'])
         #user_id = 1
         user = User.objects.get(id=user_id)
         data['data'] = user.toJsonFormat()
@@ -109,7 +109,7 @@ def user_update(request):
     修改用户信息
 
     参数:
-        POST
+        REQUEST
             {'id': xxx,
              'update': {'key': xxx,
                         'value': xxx}}
@@ -118,7 +118,7 @@ def user_update(request):
     '''
     data = {'status': 0, 'info': 'error'}
     try:
-        user_id = int(request.POST['id'])
+        user_id = int(request.REQUEST['id'])
     except Exception as e:
         data['info'] = e.__str__().strip('"').strip("'")
         print e

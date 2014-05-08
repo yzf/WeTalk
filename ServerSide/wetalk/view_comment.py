@@ -10,9 +10,9 @@ def comment_list(request):
     获取某槽点及其评论
 
     参数:
-        request.POST['id']: 槽点id
-        request.POST['start']: 区间的开始值
-        request.POST['end']: 区间的结束值
+        request.REQUEST['id']: 槽点id
+        request.REQUEST['start']: 区间的开始值
+        request.REQUEST['end']: 区间的结束值
     返回值:
         如果成功，则
             {'status': 1,
@@ -26,9 +26,9 @@ def comment_list(request):
     '''
     data = {'status': 0, 'info': 'error'}
     try:
-        spot_id = int(request.POST['id'])
-        start = int(request.POST['start'])
-        end = int(request.POST['end'])
+        spot_id = int(request.REQUEST['id'])
+        start = int(request.REQUEST['start'])
+        end = int(request.REQUEST['end'])
 
         #spot_id = 1
         #start = 0
