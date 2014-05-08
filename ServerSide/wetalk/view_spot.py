@@ -5,8 +5,25 @@ from django.core import serializers
 from models import *
 import json
 
-# 根据话题id获取该话题的所有槽点
 def spot_list(request):
+    '''
+    根据话题id获取该话题的所有槽点
+
+    参数:
+        request.POST['id']: 话题的id
+        request.POST['start']: 区间的开始值
+        request.POST['end']: 区间的结束值
+    返回值:
+        如果成功，则
+            {'status': 1,
+             'info': 'ok',
+             'data': [槽点们]}
+        否则
+            {'status': 0,
+             'info': 'error'}
+    其他:
+        区间为[start, end)
+    '''
     data = {'status': 0, 'info': 'error'}
     try:
         topic_id = int(request.POST['id'])

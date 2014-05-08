@@ -6,8 +6,25 @@ from models import *
 import json
 
 categories = ('事件', '娱乐', '路过', '怀旧')
-# 获取话题
 def topic_list(request):
+    '''
+    获取话题
+
+    参数:
+        request.POST['category']: 类型的下标
+        request.POST['start']: 区间的开始值
+        request.POST['end']: 区间的结束值
+    返回值:
+        如果成功，则
+            {'status': 1,
+             'info': 'ok',
+             'data': [话题们]}
+        否则
+            {'status': 0,
+             'info': 'error'}
+    其他:
+        区间为[start, end)
+    '''
     data = {'status': 0, 'info': 'error'}
     try:
         cg = categories[int(request.POST['category'])]

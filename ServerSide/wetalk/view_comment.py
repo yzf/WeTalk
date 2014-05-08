@@ -5,8 +5,25 @@ from django.core import serializers
 from models import *
 import json
 
-# 根据槽点id获取该槽点的所有评论
 def comment_list(request):
+    '''
+    获取某槽点及其评论
+
+    参数:
+        request.POST['id']: 槽点id
+        request.POST['start']: 区间的开始值
+        request.POST['end']: 区间的结束值
+    返回值:
+        如果成功，则
+            {'status': 1,
+             'info': 'ok',
+             'data': 数据}
+        否则
+            {'status': 0,
+             'info': 'error'}
+    其他:
+        区间为左闭右开，即[start, end)
+    '''
     data = {'status': 0, 'info': 'error'}
     try:
         spot_id = int(request.POST['id'])
