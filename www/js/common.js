@@ -123,3 +123,7 @@ simpleJs.ajax_form = function(requestUrl, requestData, name) {
 	$("body").after(html);
 	document.getElementById(formId).submit();
 }
+
+
+// 这个会因为所处网络群而改变，故需要实时人手更新
+var hosturl = "http://192.168.0.85:8000/";

@@ -2,23 +2,27 @@ $(document).ready(function() {
 	var cur = 0;
 	var len = 10;
 	var getMessage = function(cgy) {
+		// 向服务器请求时发送给服务器的数据
 		var requestData = {
             category : cgy,
             start : cur,
 			end : cur + len
         };
-        var requestUrl = "http://192.168.1.186:8000/topic_list/";
+        // 请求数据的地址
+		var requestUrl = hosturl + "topic_list/";
+		
+		// 回调函数，把服务器返回的数据放在result中，具体的数据结构看服务器决定
         var cb = function (result, requestData) {
 			cur += length;
 			if (result.status == "1" || result.status == 1) {
 				var html = [];
-				for(var i = 0; i < result.length; i++) {
+				for(var i = 0; i < result.count; i++) {
 					//result.data[i] = eval(result.data[i]);
-					html.push('<li><a href="spitslot.html?topicID=' + result.data[i].pk + '" rel="external">');
-						html.push('<span class="topic-tittle">' + result.data[i].fields.title + '</span>');
-						html.push('<span class="ui-li-count">' + result.data[i].fields.spots.length + '</span>');
+					html.push('<li><a href="spitslot.html?topicID=' + result.data[i].id + '" rel="external">');
+						html.push('<span class="topic-tittle">' + result.data[i].title + '</span>');
+						html.push('<span class="ui-li-count">' + result.data[i].spots_count + '</span>');
 						html.push('<br />');
-						html.push('<span class="time">from ' + result.data[i].fields.begin_time + ' to ' + result.data[i].fields.end_time + '</span>');
+						html.push('<span class="time">from ' + result.data[i].begin_time + ' to ' + result.data[i].end_time + '</span>');
 					html.push('</a></li>'); 
 				}
 				
@@ -31,7 +35,8 @@ $(document).ready(function() {
 			}
 			
         };
-
+	
+		// 向服务发送请求，参数：地址、发给服务器的数据、回调函数
         simpleJs.ajaxPost(requestUrl, requestData, cb);
 	};
 	
@@ -63,10 +68,19 @@ $(document).ready(function() {
 	});
 });
 
-$(doucument).ready(function() {
-	$("#search_button").bind('touchstart mousedown', function() {
-		$("#search_text").toggle();
-	});
+
+$("#search_button").bind('touchstart mousedown', function() {
+	$("#search_text").toggle();
+});
+
+
+$("#personal_button").bind('touchstart mousedown', function() {
+	var curaddress = window.location.href.substr(0,(window.location.href.indexOf("html/") + 5));
+	window.location.href = curaddress + "setting.html";
+	
+	var un_start = document.cookie.indexOf("username=");
+	var un_end=document.cookie.indexOf(";",c_start)
+	
 });
 
 

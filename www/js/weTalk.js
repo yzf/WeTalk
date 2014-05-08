@@ -7,26 +7,61 @@ $(document).ready(function() {
             start : cur,
 			end : cur + len
         };
-        var requestUrl = "http://192.168.1.186:8000/comment_list/";
+        var requestUrl = hosturl + "comment_list/";
+		var img_url = hosturl;
         var cb = function (result, requestData) {
 			cur += length;
 			if (result.status == "1" || result.status == 1) {
 				// 添加标题
-				var headerHTML = '<h1>' + result.data.fields.title + '</h1>';
-				$("#back_button").after(headerHTML);
-			
-				var html = [];
-				for(var i = 0; i < result.data.cm_list.length; i++) {
-					html.push('<p>' + result.data.cm_list[i] + '</p>');
-						html.push('</div>');
-						html.push('<span class="ui-li-count heart">' + result.data[i].up + '</span>');
-						html.push('<span class="ui-li-count talk">' + result.data[i].fields.comments.length + '</span>');
-					html.push('</a></li>'); 
+				$("#hear_title").html(result.data.title);
+				
+				// 槽点原文
+				var creator_ = [];
+				creator_.push('<img src="' + img_url + result.data.creator.icon.url + '" />');
+				creator_.push('<div class="user">');
+					creator_.push('<span class="h3">' + result.data.creator.name + '</span>');
+					creator_.push('<br />');
+					creator_.push('<span class="time">' + result.data.create_time + '</span>');
+				creator_.push('</div>');
+				$('#creator_info').append(creator_);
+				
+				$("#content_text").html(result.data.content);
+				var original_ = [];
+				for(var i = 0; i < result.data.imgs.length; i++) {
+					original_.push('<img src="' + img_url + result.data.imgs[i].url + '" />');
+				}
+				original_ = original_.join("");
+				$("#original_text").append(original_);
+				
+				// 点赞和评论数
+				$("#heart_num").html(result.data.up);
+				$("#comment_num").html(result.data.comments.length);
+				
+				// 评论
+				var comment_ = [];
+				for(var i = 0; i < result.data.comments.length; i++) {
+					comment_.push('<li><a href="#" >');
+						comment_.push('<div class="we-talk-style-itemshow">');
+							comment_.push('<div class="maincontent">');
+								comment_.push('<div class="talker-info">');
+									comment_.push('<img src="' + img_url + result.data.comments[i].creator.icon.url + '" />');
+									comment_.push('<div class="user">');
+										comment_.push('<span class="h3">' + result.data.comments[i].creator.name + '</span>');
+										comment_.push('<br />');
+										comment_.push('<span class="time">' + result.data.comments[i].create_time + '</span>');
+									comment_.push('</div>');
+								comment_.push('</div>');
+								comment_.push('<div class="show-info">');
+									comment_.push('<p>' + result.data.comments[i].content + '</p>');
+								comment_.push('</div>');
+							comment_.push('</div>');
+						comment_.push('</div>');
+					comment_.push('</a></li>');
 				}
 				
-				html = html.join("");	// 转换成一个字符串
-				$("#spitslotList").append(html);
-				$("#spitslotList").listview('refresh');
+				comment_ = comment_.join("");	// 转换成一个字符串
+				$("#comment_List").append(comment_);
+				$("#comment_List").listview('refresh');
 			}
 			else {
 				// 失败的情况，弹框显示
@@ -37,7 +72,7 @@ $(document).ready(function() {
         simpleJs.ajaxPost(requestUrl, requestData, cb);
 	};
 	
-	// 通过url获取当前的topicID
+	// 通过url获取当前的spitlotID
 	var spitlotID = parseInt(window.location.href.substr((window.location.href.indexOf("=") + 1)));
 	
 	getMessage(spitlotID);
