@@ -4,18 +4,18 @@
 
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
-     <!--
+    <!--
     <meta name="viewport" content="user-scalable=yes, initial-scale=20, maximum-scale=20, minimum-scale=20, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-    -->	
-    	
-        
+    -->
+
+
     <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../js/jquery.mobile-1.4.2.min.js"></script>
     <!--
 	<script type="text/javascript" src="cordova.js"></script>-->
     <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript" src="../js/index.js"></script>
-        
+    <script type="text/javascript" src="../js/weTalk.js"></script>
+
     <link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.4.2.min.css" />
     <link rel="stylesheet" type="text/css" href="../css/index.css" />
 
@@ -26,39 +26,27 @@
 
         <div data-role="header" data-position="fixed" class="we-talk-style we-talk-style-header">
             <a id="back_button" href="#" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn" data-rel="back">Back</a>
-            <h1>新闻发言人SB新闻发言人SB新闻发言人SB新闻发言人SB</h1>
+            <h1 id="hear_title"></h1>
             <a href="#link" data-role="button" data-icon="plus" data-iconpos="notext" class="user-add-ui-btn">add</a>
         </div>
 
         <div data-role="content" class="we-talk-style we-talk-style-content clear">
             <div class="we-talk-style-itemshow">
                 <div class="maincontent">
-                    <div class="talker-info">
-                        <img src="../images/portrait/1.jpg" />
-                        <div class="user">
-                            <span class="h3">大袁同学</span>
-                            <br />
-                            <span class="time">1个小时前</span>
-                        </div>
+                    <div id="creator_info" class="talker-info">
                     </div>
-                    <div class="show-info">
-                        <p>
-                            新闻发言人SB新闻发言人SB新闻发言人SB新闻发言人SB
-                            新闻发言人SB新闻发言人SB新闻发言人SB新闻发言人SB
-                            新闻发言人SB新闻发言人SB新闻发言人SB新闻发言人SB
-                        </p>
-                        <img src="../images/talk/show1.jpg">
-                        <img src="../images/talk/show2.jpg">
+                    <div id="original_text" class="show-info">
+                        <p id="content_text"></p>
                     </div>
                 </div>
-				
+
                 <div data-role="navbar" class="likeBox">
                     <ul>
                         <li>
-                            <a href="#" data-icon="heart" data-iconpos="right">44</a>
+                            <a id="heart_num" href="#" data-icon="heart" data-iconpos="right"></a>
                         </li>
                         <li>
-                            <a href="#" data-icon="comment" data-iconpos="right">33</a>
+                            <a id="comment_num" href="#" data-icon="comment" data-iconpos="right"></a>
                         </li>
                     </ul>
                 </div>
@@ -66,46 +54,9 @@
             <div class="title">
                 评论
             </div>
-
-            <div class="we-talk-style-itemshow">
-                <div class="maincontent">
-                    <div class="talker-info">
-                        <img src="../images/portrait/1.jpg" />
-                        <div class="user">
-                            <span class="h3">大袁同学</span>
-                            <br />
-                            <span class="time">1个小时前</span>
-                        </div>
-                    </div>
-                    <div class="show-info">
-                        <p>
-                            新闻发言人SB新闻发言人SB新闻发言人SB新闻发言人SB
-                            新闻发言人SB新闻发言人SB新闻发言人SB新闻发言人SB
-                            新闻发言人SB新闻发言人SB新闻发言人SB新闻发言人SB
-                        </p>
-                        <img src="../images/talk/show2.jpg">
-                    </div>
-                </div>
-            </div>
-
-            <div class="we-talk-style-itemshow">
-                <div class="maincontent">
-                    <div class="talker-info">
-                        <img src="../images/portrait/1.jpg" />
-                        <div class="user">
-                            <span class="h3">大袁同学</span>
-                            <br />
-                            <span class="time">1个小时前</span>
-                        </div>
-                    </div>
-                    <div class="show-info">
-                        <p>
-                            新闻发言人SB新闻发言人SB新闻发言人SB新闻发言人SB
-                            新闻发言人SB新闻发言人SB新闻发言人SB新闻发言人SB
-                            新闻发言人SB新闻发言人SB新闻发言人SB新闻发言人SB
-                        </p>
-                    </div>
-                </div>
+            <div>
+                <ul id="comment_List" data-inset="true" data-role="listview" class="we-talk-style-itemshow">
+                </ul>
             </div>
 
         </div>
@@ -115,6 +66,6 @@
             <a href="#link" data-role="button" data-icon="plus" data-iconpos="left" class="add-groove">评论</a>
         </div>
 
-    </div>	
+    </div>
 </body>
 </html>
