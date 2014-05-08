@@ -7,6 +7,7 @@ from view_user import *
 from view_topic import *
 from view_spot import *
 from view_comment import *
+from view_image import *
 
 def test(request):
     data = {}

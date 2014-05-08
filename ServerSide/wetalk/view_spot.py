@@ -43,6 +43,7 @@ def spot_list(request):
 
         data['status'] = 1
         data['info'] = 'ok'
-    except Exception, e:
+    except Exception as e:
+        data['info'] = e.__str__().strip('"').strip("'")
         print e
     return HttpResponse(json.dumps(data))

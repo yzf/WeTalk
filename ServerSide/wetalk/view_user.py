@@ -32,12 +32,12 @@ def register(request):
             raise # 账号或者密码为空
         user.save()
         user_data = user.toJsonFormat()
-        user_data.pop('password')
         request.session['user'] = user_data
 
         data['status'] = 1
         data['info'] = 'ok'
-    except Exception, e:
+    except Exception as e:
+        data['info'] = e.__str__().strip('"').strip("'")
         print e
     return HttpResponse(json.dumps(data))
 
@@ -60,15 +60,18 @@ def login(request):
     '''
     data = {'status': 0, 'info': 'error'}
     try:
-        user = User.objects.get(username=request.POST['username'], \
-                                password=request.POST['password'])
+        username = request.POST['username']
+        password = request.POST['password']
+        #username = r'admin@admin.com'
+        #password = r'1'
+        user = User.objects.get(username=username, password=password)
         user_data = user.toJsonFormat()
-        user_data.pop('password')
         request.session['user'] = user_data
 
         data['status'] = 1
         data['info'] = 'ok'
-    except Exception, e:
+    except Exception as e:
+        data['info'] = e.__str__().strip('"').strip("'")
         print e
     return HttpResponse(json.dumps(data))
 
@@ -96,7 +99,8 @@ def user(request):
 
         data['status'] = 1
         data['info'] = 'ok'
-    except Exception, e:
+    except Exception as e:
+        data['info'] = e.__str__().strip('"').strip("'")
         print e
     return HttpResponse(json.dumps(data))
 
@@ -105,13 +109,17 @@ def user_update(request):
     修改用户信息
 
     参数:
-
+        POST
+            {'id': xxx,
+             'update': {'key': xxx,
+                        'value': xxx}}
     返回值:
 
     '''
     data = {'status': 0, 'info': 'error'}
     try:
         user_id = int(request.POST['id'])
-    except Exception, e:
+    except Exception as e:
+        data['info'] = e.__str__().strip('"').strip("'")
         print e
     return HttpResponse(json.dumps(data))

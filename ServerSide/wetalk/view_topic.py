@@ -41,7 +41,8 @@ def topic_list(request):
             data['data'].append(tp.toJsonFormat())
         data['status'] = 1
         data['info'] = 'ok'
-    except Exception, e:
+    except Exception as e:
+        data['info'] = e.__str__().strip('"').strip("'")
         print e
     return HttpResponse(json.dumps(data))
 
@@ -51,5 +52,6 @@ def topic_add(request):
     try:
         topic = Topic()
     except Exception, e:
+        data['info'] = e.message
         print e
     return HttpResponse(json.dumps(data))
