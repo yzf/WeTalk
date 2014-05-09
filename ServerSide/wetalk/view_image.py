@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.core import serializers
 from PIL import Image as PILImage
 from wetalk.models import Image
-import json, string, random
+import json, string, random, util
 
 def image_upload(request):
     data = {'status': 0, 'info': 'error'}
@@ -27,6 +27,6 @@ def image_upload(request):
         data['info'] = 'ok'
         data['url'] = img_url
     except Exception as e:
-        data['info'] = e.__str__().strip('"').strip("'")
+        data['info'] = util.get_exception_message(e)
         print e
     return HttpResponse(json.dumps(data))

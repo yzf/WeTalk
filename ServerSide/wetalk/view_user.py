@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
 from models import *
-import json
+import json, util
 
 def register(request):
     '''
@@ -37,7 +37,7 @@ def register(request):
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:
-        data['info'] = e.__str__().strip('"').strip("'")
+        data['info'] = util.get_exception_message(e)
         print e
     return HttpResponse(json.dumps(data))
 
@@ -71,16 +71,16 @@ def login(request):
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:
-        data['info'] = e.__str__().strip('"').strip("'")
+        data['info'] = util.get_exception_message(e)
         print e
     return HttpResponse(json.dumps(data))
 
 def user(request):
     '''
-    获取个人信息
+    获取个人信息，必须登陆后才行
 
     参数:
-        request.REQUEST['id']: 用户的id
+
     返回值:
         没有任何异常，则
             {'status': 1,
@@ -92,15 +92,14 @@ def user(request):
     '''
     data = {'status': 0, 'info': 'error'}
     try:
-        user_id = int(request.REQUEST['id'])
-        #user_id = 1
-        user = User.objects.get(id=user_id)
-        data['data'] = user.toJsonFormat()
-
+        data['data'] = request.session.get('user', False)
+        if data['data'] == False:
+            data.pop('data')
+            raise Exception('have not login')
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:
-        data['info'] = e.__str__().strip('"').strip("'")
+        data['info'] = util.get_exception_message(e)
         print e
     return HttpResponse(json.dumps(data))
 
@@ -120,6 +119,6 @@ def user_update(request):
     try:
         user_id = int(request.REQUEST['id'])
     except Exception as e:
-        data['info'] = e.__str__().strip('"').strip("'")
+        data['info'] = util.get_exception_message(e)
         print e
     return HttpResponse(json.dumps(data))

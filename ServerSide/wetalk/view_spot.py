@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
 from models import *
-import json
+import json, util
 
 def spot_list(request):
     '''
@@ -44,6 +44,6 @@ def spot_list(request):
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:
-        data['info'] = e.__str__().strip('"').strip("'")
+        data['info'] = util.get_exception_message(e)
         print e
     return HttpResponse(json.dumps(data))

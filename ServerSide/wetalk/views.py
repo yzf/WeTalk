@@ -10,6 +10,7 @@ from view_comment import *
 from view_image import *
 
 def test(request):
-    data = {}
+    data = {'status': 1,
+            'info': 'this is just a test'}
     return HttpResponse(json.dumps(data))
 
