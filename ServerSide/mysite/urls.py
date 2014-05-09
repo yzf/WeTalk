@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     # 与用户相关
     (r'^register/', register),
     (r'^login/', login),
+    (r'^logout/', logout),
     (r'^user/', user),
     # 与话题相关
     (r'^topic_list/', topic_list),

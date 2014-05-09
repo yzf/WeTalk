@@ -23,6 +23,7 @@ def register(request):
         注册成功后，session['user']保存着用户的个人信息
     '''
     data = {'status': 0, 'info': 'error'}
+    response = HttpResponse(json.dumps(data))
     try:
         user = User()
         user.username = request.REQUEST['username']
@@ -36,10 +37,12 @@ def register(request):
 
         data['status'] = 1
         data['info'] = 'ok'
+        response = HttpResponse(json.dumps(data))
+        response.set_cookie('user', user_data)
     except Exception as e:
         data['info'] = util.get_exception_message(e)
         print e
-    return HttpResponse(json.dumps(data))
+    return response
 
 def login(request):
     '''
@@ -59,6 +62,7 @@ def login(request):
         登陆成功后，session['user']保存着用户的个人信息
     '''
     data = {'status': 0, 'info': 'error'}
+    response = HttpResponse(json.dumps(data))
     try:
         username = request.REQUEST['username']
         password = request.REQUEST['password']
@@ -68,6 +72,23 @@ def login(request):
         user_data = user.toJsonFormat()
         request.session['user'] = user_data
 
+        data['status'] = 1
+        data['info'] = 'ok'
+        # 设置cookie
+        response = HttpResponse(json.dumps(data))
+        response.set_cookie('user', user_data)
+    except Exception as e:
+        data['info'] = util.get_exception_message(e)
+        print e
+    return response
+
+def logout(request):
+    '''
+    登出
+    '''
+    data = {'status': 0, 'info': 'error'}
+    try:
+        request.session.clear()
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:
