@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
+from django.contrib.sessions.models import Session
 from models import *
 import json, util
 
@@ -23,26 +24,24 @@ def register(request):
         注册成功后，session['user']保存着用户的个人信息
     '''
     data = {'status': 0, 'info': 'error'}
-    response = HttpResponse(json.dumps(data))
     try:
         user = User()
         user.username = request.REQUEST['username']
         user.password = request.REQUEST['password']
-        user.icon = Image.objects.get(id=1)
+        user.icon = Image.objects.get(id=1)#设置图像
         if user.username.strip() == '' or user.password.strip() == '':
             raise # 账号或者密码为空
-        user.save()
+        user.save()# 插入数据
         user_data = user.toJsonFormat()
         request.session['user'] = user_data
 
+        data['session_id'] = reqeust.session.session_key
         data['status'] = 1
         data['info'] = 'ok'
-        response = HttpResponse(json.dumps(data))
-        response.set_cookie('user', user_data)
     except Exception as e:
         data['info'] = util.get_exception_message(e)
         print e
-    return response
+    return HttpResponse(json.dumps(data))
 
 def login(request):
     '''
@@ -62,25 +61,21 @@ def login(request):
         登陆成功后，session['user']保存着用户的个人信息
     '''
     data = {'status': 0, 'info': 'error'}
-    response = HttpResponse(json.dumps(data))
     try:
         username = request.REQUEST['username']
         password = request.REQUEST['password']
-        #username = r'admin@admin.com'
-        #password = r'1'
+
         user = User.objects.get(username=username, password=password)
         user_data = user.toJsonFormat()
         request.session['user'] = user_data
 
+        data['session_id'] = request.session.session_key
         data['status'] = 1
         data['info'] = 'ok'
-        # 设置cookie
-        response = HttpResponse(json.dumps(data))
-        response.set_cookie('user', user_data)
     except Exception as e:
         data['info'] = util.get_exception_message(e)
         print e
-    return response
+    return HttpResponse(json.dumps(data))
 
 def logout(request):
     '''
@@ -88,7 +83,10 @@ def logout(request):
     '''
     data = {'status': 0, 'info': 'error'}
     try:
-        request.session.clear()
+        session_id = request.REQUEST['session_id']
+        session = Session.objects.get(session_key=session_id)
+        session.delete()
+
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:
@@ -113,10 +111,10 @@ def user(request):
     '''
     data = {'status': 0, 'info': 'error'}
     try:
-        data['data'] = request.session.get('user', False)
-        if data['data'] == False:
-            data.pop('data')
-            raise Exception('have not login')
+        session_id = request.REQUEST['session_id']
+        session = Session.objects.get(session_key=session_id)
+
+        data['data'] = session.get_decoded()
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:
