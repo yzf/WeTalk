@@ -46,9 +46,9 @@ $("#registerButton").bind('touchstart mousedown', function() {
 		
 		var cb = function(result) {
 			if(result.status == 1) {
-				// 当前地址
-				var curaddress = window.location.href.substr(0,(window.location.href.indexOf("html/") + 5));
-				window.location.href = curaddress + "channel.html";
+			    // 当前地址
+			    simpleJs.setCookie("sessionid", result["sessionid"]);
+			    simpleJs.fuzzyRedirect("home");
 			}
 			else {
 				alert("Register Failed!");

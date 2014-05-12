@@ -23,6 +23,8 @@ $(document).ready(function() {
 					creator_.push('<br />');
 					creator_.push('<span class="time">' + result.data.create_time + '</span>');
 				creator_.push('</div>');
+
+				creator_ = creator_.join("");
 				$('#creator_info').append(creator_);
 				
 				$("#content_text").html(result.data.content);

@@ -38,10 +38,9 @@ $("#loginButton").bind('touchstart mousedown', function () {
 		var requestUrl = hosturl + "login/";
 		
 		var cb = function(result) {
-			if(result.status == 1) {
-				// µ±«∞µÿ÷∑
-//				var curaddress = window.location.href.substr(0,(window.location.href.indexOf("html/") + 5));
-//				window.location.href = curaddress + "home.html";
+		    if (result.status == 1) {
+		        simpleJs.setCookie("sessionid", result["sessionid"]);
+			    simpleJs.fuzzyRedirect("channel");
 			}
 			else {
 				alert("Password does not match the account!");
