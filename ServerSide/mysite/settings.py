@@ -96,3 +96,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'resource/'),
 )
 
+SESSION_SAVE_EVERY_REQUEST = True

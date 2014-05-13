@@ -16,7 +16,8 @@ def register(request):
     返回值:
         如果成功，则返回
             {'status': 1,
-             'info': 'ok'}
+             'info': 'ok',
+             'session_id': session的id}
         否则
             {'status': 0,
              'info': 'error'}
@@ -53,7 +54,8 @@ def login(request):
     返回值:
         如果成功，则返回
             {'status': 1,
-             'info': 'ok'}
+             'info': 'ok',
+             'session_id': session的id}
         否则
             {'status': 0,
              'info': 'error'}
@@ -128,7 +130,7 @@ def user_update(request):
 
     参数:
         REQUEST
-            {'id': xxx,
+            {'session_id': xxx,
              'update': {'key': xxx,
                         'value': xxx}}
     返回值:
@@ -136,7 +138,14 @@ def user_update(request):
     '''
     data = {'status': 0, 'info': 'error'}
     try:
-        user_id = int(request.REQUEST['id'])
+        session_id = request.REQUEST['session_id']
+        session = Session.objects.get(session_key=session_id)
+        user_data = session.get_decoded()['user']
+        user_id = int(user_data['id'])
+        user = User.objects.get(id=user_id)
+
+        data['status'] = 1
+        data['info'] = 'ok'
     except Exception as e:
         data['info'] = util.get_exception_message(e)
         print e
