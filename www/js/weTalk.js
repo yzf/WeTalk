@@ -76,7 +76,103 @@ $(document).ready(function() {
 	
 	// 通过url获取当前的spitlotID
 	var spitlotID = parseInt(window.location.href.substr((window.location.href.indexOf("=") + 1)));
-	
 	getMessage(spitlotID);
 	
+});
+
+// "dian zan" which also the same as addup the heart_num	
+$("#heart_num").bind('touchstart mousedown', function() {
+	var addUp = function(id) {
+		var requestUrl = hosturl + "add_up/";
+		var requestData = { id : id };
+	  	var cb = function(result) {
+	  		if (result.status == "1" || result.status == 1) {
+	  			// after change the id = "heart_num"'s data instead of loading the whole page
+	  			var up_num = parseInt($("#heart_num").html());
+	  			$("#heart_num").html(up_num + 1);
+	        }
+	        else {
+	        	alert("result.status is Error!");
+	        }
+	    };
+
+	    simpleJs.ajaxPost(requestUrl, requestData, cb);
+	};
+
+	// As spotslot.html jump from spitlot.html, and the url with spitlotID.
+	var spitlotID = parseInt(window.location.href.substr((window.location.href.indexOf("=") + 1)));
+	addUp(spitlotID);
+});
+
+
+// add comment
+$("#add_comment").bind("touchstart mousedown", function() {
+	var content = $("#Text1").val();
+	//var create_time = new Date();
+	
+	var now_ = new Date();
+	var create_time = "";
+	create_time += now_.getFullYear() + "-";
+	create_time += (now_.getMonth() + 1) + "-";
+	create_time += now_.getDate() + " ";
+	create_time += now_.getHours() + ":";
+	create_time += now_.getMinutes() + ":";
+	create_time += now_.getSeconds();
+	// var creator_;					// get user info from localstorage, and localstorage only offers the authkey.
+										// then we need to push authkey to view_comment.py and get the user data there.
+	var authkey = simpleJs.getCookie(simpleJs.seesionid);
+
+	if(content == null || content == "") {
+		alert("Comment is empty!");
+		return;
+	}
+
+	var img_url = hosturl;
+	var addComment = function(id) {
+		var requestUrl = hosturl + "add_comments/";
+		var requestData = { 
+			id : id,
+			creator_authkey : authkey,
+			create_time_ : create_time,
+			content_ : content
+		};
+		var cb = function(result) {
+			if(parseInt(result.status) == 1) {
+				// add the new comment to the comment list dynamically instead of load the whole page.
+				// do not need to get data from database, just use the input one
+				var new_comment = [];
+				
+				new_comment.push('<li><a href="#" >');
+					new_comment.push('<div class="we-talk-style-itemshow">');
+						new_comment.push('<div class="maincontent">');
+							new_comment.push('<div class="talker-info">');
+								// the creator info should get from cookie 
+								new_comment.push('<img src="' + img_url + result.comment.creator.icon.url + '" />');
+								new_comment.push('<div class="user">');
+									new_comment.push('<span class="h3">' + result.comment.creator.name + '</span>');
+									new_comment.push('<br />');
+									new_comment.push('<span class="time">' + result.comment.create_time + '</span>');
+								new_comment.push('</div>');
+							new_comment.push('</div>');
+							new_comment.push('<div class="show-info">');
+								new_comment.push('<p>' + result.comment.content + '</p>');
+							new_comment.push('</div>');
+						new_comment.push('</div>');
+					new_comment.push('</div>');
+				new_comment.push('</a></li>');
+
+				new_comment = new_comment.join("");
+				$("#comment_List").append(new_comment);
+				$("#comment_List").listview('refresh');
+			}
+			else {
+				alert("result.status is error!");
+			}
+		};
+
+		simpleJs.ajaxPost(requestUrl, requestData, cb);
+	};
+
+	var spitlotID = parseInt(window.location.href.substr((window.location.href.indexOf("=") + 1)));
+	addComment(spitlotID); 
 });

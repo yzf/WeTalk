@@ -11,9 +11,11 @@
 
     <link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.4.2.min.css" />
     <link rel="stylesheet" type="text/css" href="../css/index.css" />
-
+	<script type="text/javascript" src="../js/cordova.js"></script>
     <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../js/jquery.mobile-1.4.2.min.js"></script>
+    <script type="text/javascript" src="../js/createSplitslot.js"></script>
+    
     <title>Hello World</title>
 </head>
 <body>
@@ -22,21 +24,36 @@
         <div data-role="header" data-position="fixed" class="we-talk-style we-talk-style-header">
             <a href="home.html" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn" data-rel="back">Back</a>
             <h1>槽点</h1>
-            <a href="javascript:void(0);" data-role="button" data-icon="action" data-iconpos="notext" class="user-add-ui-btn">Save</a>
+            <a href="javascript:void(0);" id="saveSplitslot" data-role="button" data-icon="action" data-iconpos="notext" class="user-add-ui-btn">Save</a>
         </div>
 
         <div data-role="content" class="we-talk-style we-talk-style-content clear">
             <div class="setting clear setting-info">
-                <input type="text" id="fname" placeholder="槽点标题" />
+                <input type="text" id="SplitslotTitle" placeholder="槽点标题" />
                 <div data-role="fieldcontain">
-                    <textarea name="textarea" id="textarea"></textarea>
+                    <textarea name="textarea" id="SplitslotContent"></textarea>
                 </div>
             </div>
         </div>
         <div data-role="footer" class="we-talk-style we-talk-style-header" data-position="inline">
             <div class="icon-box">
-                <a href="javascript:void(0);" data-role="button" data-icon="grid" data-iconpos="notext" class="user-footer-ui-btn user-icon-ui-btn">Phone</a>
-                <a href="javascript:void(0);" data-role="button" data-icon="camera" data-iconpos="notext" class="user-footer-ui-btn user-icon-ui-btn">camera</a>
+                <a href="javascript:void(0);" id="photos" data-role="button" data-icon="grid" data-iconpos="notext" class="user-footer-ui-btn user-icon-ui-btn">Phone</a>
+                <a href="javascript:void(0);" id="camera" data-role="button" data-icon="camera" data-iconpos="notext" class="user-footer-ui-btn user-icon-ui-btn">camera</a>
+            </div>
+            <div class="phone-box" id="picturesBox">
+	            <!--<div class="picture" id="picture"> 
+					<img src="../images/talk/show1.jpg" id="showImage1" class="showImage" />
+					<img src="../images/icons-png/delete-black.png" class="deleteIcon" index="" />
+				</div>
+				
+				<div class="picture"> 
+					<img src="../images/talk/show2.jpg" id="showImage2" class="showImage" />
+					<img src="../images/icons-png/delete-black.png" class="deleteIcon" index="" />
+				</div>
+				<div class="picture"> 
+					<img src="../images/talk/show3.jpg" id="showImage3" class="showImage" />
+					<img src="../images/icons-png/delete-black.png" class="deleteIcon" index="" />
+				</div>-->
             </div>
         </div>
     </div>

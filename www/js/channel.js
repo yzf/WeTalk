@@ -2,16 +2,16 @@ $(document).ready(function() {
 	var cur = 0;
 	var len = 10;
 	var getMessage = function(cgy) {
-		// Ïò·þÎñÆ÷ÇëÇóÊ±·¢ËÍ¸ø·þÎñÆ÷µÄÊý¾Ý
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		var requestData = {
             category : cgy,
             start : cur,
 			end : cur + len
         };
-        // ÇëÇóÊý¾ÝµÄµØÖ·
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄµï¿½Ö·
 		var requestUrl = hosturl + "topic_list/";
 		
-		// »Øµ÷º¯Êý£¬°Ñ·þÎñÆ÷·µ»ØµÄÊý¾Ý·ÅÔÚresultÖÐ£¬¾ßÌåµÄÊý¾Ý½á¹¹¿´·þÎñÆ÷¾ö¶¨
+		// ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½resultï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         var cb = function (result, requestData) {
 			cur += length;
 			if (result.status == "1" || result.status == 1) {
@@ -22,27 +22,27 @@ $(document).ready(function() {
 						html.push('<span class="topic-tittle">' + result.data[i].title + '</span>');
 						html.push('<span class="ui-li-count">' + result.data[i].spots_count + '</span>');
 						html.push('<br />');
-						html.push('<span class="time">from ' + result.data[i].begin_time + ' to ' + result.data[i].end_time + '</span>');
+						html.push('<span class="time">from ' + result.data[i].begin_time.substr(0, 10) + ' to ' + result.data[i].end_time.substr(0, 10) + '</span>');
 					html.push('</a></li>'); 
 				}
 				
-				html = html.join("");	// ×ª»»³ÉÒ»¸ö×Ö·û´®
+				html = html.join("");	// ×ªï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö·ï¿½
 				$("#topicList").append(html);
 				$("#topicList").listview('refresh');
 			}
 			else {
-				// Ê§°ÜµÄÇé¿ö£¬µ¯¿òÏÔÊ¾
+				// Ê§ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
 			}
 			
         };
 	
-		// Ïò·þÎñ·¢ËÍÇëÇó£¬²ÎÊý£ºµØÖ·¡¢·¢¸ø·þÎñÆ÷µÄÊý¾Ý¡¢»Øµ÷º¯Êý
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó£¬²ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
         simpleJs.ajaxPost(requestUrl, requestData, cb);
 	};
 	
 	var startPage = 0;
 	
-	// µÚÒ»´Î¼ÓÔØÄ¬ÈÏ
+	// ï¿½ï¿½Ò»ï¿½Î¼ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½
 	getMessage(startPage);
 	
 	$("#listV li a").bind('touchstart mousedown', function () {

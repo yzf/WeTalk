@@ -17,6 +17,7 @@
     <script type="text/javascript" src="../js/jquery.mobile-1.4.2.min.js"></script>
     <script type="text/javascript" src="../js/jqm-datebox.core.min.js"></script>
     <script type="text/javascript" src="../js/jqm-datebox.mode.calbox.min.js"></script>
+    <script type="text/javascript" src="../js/createTopic.js"></script>
     <title>Hello World</title>
 </head>
 <body>
@@ -25,12 +26,12 @@
         <div data-role="header" data-position="fixed" class="we-talk-style we-talk-style-header">
             <a href="#home" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn" data-rel="back">Back</a>
             <h1>话题</h1>
-            <a href="javascript:void(0);" data-role="button" data-icon="action" data-iconpos="notext" class="user-add-ui-btn">Save</a>
+            <a href="javascript:void(0);" id="saveTopic" data-role="button" data-icon="action" data-iconpos="notext" class="user-add-ui-btn">Save</a>
         </div>
 
         <div data-role="content" class="we-talk-style we-talk-style-content clear">
             <div class="setting clear setting-info">
-                <input type="text" id="fname" placeholder="话题标题" />
+                <input type="text" id="topicTitle" placeholder="话题标题" />
                 <input name="startTime" placeholder="开始时间" id="startTime" type="text" data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}' />
                 <input name="endTime" placeholder="开始时间" id="endTime" type="text" data-role="datebox" data-options='{"mode":"calbox", "useNewStyle":true}' />
             </div>

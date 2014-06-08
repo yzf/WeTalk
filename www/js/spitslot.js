@@ -14,7 +14,7 @@ $(document).ready(function() {
 			if (result.status == "1" || result.status == 1) {
 				var html = [];
 				for(var i = 0; i < result.count; i++) {
-					html.push('<li><a href="weTalk.html?spitlotID=' + result.data[i].id + '" rel="external">');
+					html.push('<li class="topic"><a href="weTalk.html?spitlotID=' + result.data[i].id + '" rel="external">');
 						if(result.data[i].imgs.length != 0) {
 							html.push('<img src="' + img_url + result.data[i].imgs[0].url + '">');
 						}
@@ -27,25 +27,25 @@ $(document).ready(function() {
 						html.push('</div>');
 						html.push('<span class="ui-li-count heart">&hearts; ' + result.data[i].up + '</span>');
 						html.push('<span class="ui-li-count talk">T ' + result.data[i].comments_count + '</span>');
-					html.push('</a></li>'); 
+					html.push('</a></li>');
 				}
-				
-				html = html.join("");	// 转换成一个字符串
+
+				html = html.join("");	// 脳陋禄禄鲁脡脪禄赂枚脳脰路没麓庐
 				$("#spitslotList").append(html);
 				$("#spitslotList").listview('refresh');
 			}
 			else {
-				// 失败的情况，弹框显示
+				// 脢搂掳脺碌脛脟茅驴枚拢卢碌炉驴貌脧脭脢戮
 			}
-			
+
         };
-		
+
         simpleJs.ajaxPost(requestUrl, requestData, cb);
 	};
-	
-	// 通过url获取当前的topicID
+
+	// 脥篓鹿媒url禄帽脠隆碌卤脟掳碌脛topicID
 	var topicID = parseInt(window.location.href.substr((window.location.href.indexOf("=") + 1)));
-	
+	simpleJs.setCookie("topicID", topicID);
 	getMessage(topicID);
-	
+
 });

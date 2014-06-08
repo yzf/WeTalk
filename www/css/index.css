@@ -125,7 +125,7 @@
 }
 
 .we-talk-style .we-talk-style-list .topic a  img{
-	padding: 1.2em 0.6em 0.6em 0.8em !important;
+	padding: 0.5em 0.6em 0.6em 0.8em !important;
 }
 
 .we-talk-style .we-talk-style-list .topic a div {
@@ -361,7 +361,7 @@
 	background-color: white;
 	background-repeat:no-repeat;
 	background-position-x: 50%;
-	background-position-y: 20%;
+	background-position-y: 10%;
 	background-attachment:fixed;
 }
 
@@ -372,7 +372,7 @@
 }
 
 .we-talk-style-login-page .loginbox input{
-	padding: 0.5em !important;
+	padding: 0.1em 0.5em !important;
 	font-size: 1.2em !important;
 }
 
@@ -411,8 +411,8 @@
     }
 
         .we-talk-style .we-talk-style-itemshow .talker-info .user {
-            margin-left: 6em;
-            margin-top: 0.6em;
+            margin-left: 4em;
+            margin-top: 0.3em;
         }
 
     .we-talk-style .we-talk-style-itemshow .show-info img {
@@ -448,5 +448,24 @@
 
     .we-talk-style .icon-box .user-icon-ui-btn {
         margin-left: 1%;
+    }
+    
+    .we-talk-style .phone-box {
+    	width: 100% !important;
+    }
+    
+    .we-talk-style .phone-box .picture {
+    	float: left;
+    	margin-top: 0.4em;
+        margin-left: 2%;
+        margin-right: 2%;
+        position: relative;
+    }
+    
+    .we-talk-style .phone-box .picture .deleteIcon {
+    	position: absolute;
+		left: 87%;
+		top: 0.4em;
+        z-index: 99;
     }
 /*************************** createSplitslot *****************************/

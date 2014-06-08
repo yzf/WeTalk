@@ -1,6 +1,6 @@
 $("#loginButton").bind('touchstart mousedown', function () {
 
-	// 判断登陆界面输入的账号和密码是否存在为空
+	// 脜脨露脧碌脟脗陆陆莽脙忙脢盲脠毛碌脛脮脣潞脜潞脥脙脺脗毛脢脟路帽麓忙脭脷脦陋驴脮
 	var account_ = $("#loginAccountInput").val();
 	var password_ = $("#loginPasswordInput").val();
 	
@@ -13,34 +13,35 @@ $("#loginButton").bind('touchstart mousedown', function () {
 		return;
 	}
 	
-	// 判断用户名是否一个邮箱，以下是邮箱的正则表达式
+	// 脜脨露脧脫脙禄搂脙没脢脟路帽脪禄赂枚脫脢脧盲拢卢脪脭脧脗脢脟脫脢脧盲碌脛脮媒脭貌卤铆麓茂脢陆
 	var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
 	if(!reg.test(account_)) {
 		alert("Account is not an email address!");
 		return;
 	}
 	
-	// 秘密需要保证不错过6个字符
+	// 脙脴脙脺脨猫脪陋卤拢脰陇虏禄麓铆鹿媒6赂枚脳脰路没
 	if(password_.length > 6) {
 		alert("Password should be within 6 chars");
 		return;
 	}
 	
 	
-	// 把数据发给数据库，获取返回的信息
+	// 掳脩脢媒戮脻路垄赂酶脢媒戮脻驴芒拢卢禄帽脠隆路碌禄脴碌脛脨脜脧垄
 	var tryLogin = function(usrn, pwd) {
-		// 向服务器请求时发送给服务器的数据
+		// 脧貌路镁脦帽脝梅脟毛脟贸脢卤路垄脣脥赂酶路镁脦帽脝梅碌脛脢媒戮脻
 		var requestData = {
             username : usrn,
 			password : pwd
         };
-        // 请求数据的地址
+        // 脟毛脟贸脢媒戮脻碌脛碌脴脰路
 		var requestUrl = hosturl + "login/";
 		
 		var cb = function(result) {
 		    if (result.status == 1) {
-		        simpleJs.setCookie("sessionid", result["sessionid"]);
-			    simpleJs.fuzzyRedirect("channel");
+		        simpleJs.setCookie(simpleJs.seesionid, result[simpleJs.seesionid])	
+		        simpleJs.ajaxPost(simpleJs.getURL("user"));
+		        simpleJs.fuzzyRedirect("channel");
 			}
 			else {
 				alert("Password does not match the account!");
@@ -49,7 +50,7 @@ $("#loginButton").bind('touchstart mousedown', function () {
 				
 		};
 		
-		// 向服务发送请求，参数：地址、发给服务器的数据、回调函数
+		// 脧貌路镁脦帽路垄脣脥脟毛脟贸拢卢虏脦脢媒拢潞碌脴脰路隆垄路垄赂酶路镁脦帽脝梅碌脛脢媒戮脻隆垄禄脴碌梅潞炉脢媒
         simpleJs.ajaxPost(requestUrl, requestData, cb);
 	};
 	

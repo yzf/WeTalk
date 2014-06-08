@@ -25,16 +25,15 @@
     <div data-role="page" id="discover">
 
         <div data-role="header" data-position="fixed" class="we-talk-style we-talk-style-header">
-            <a href="#link" data-role="button" data-icon="plus" data-iconpos="notext" class="user-add-ui-btn">add</a>
-            <h1>发现</h1>
-            <a href="search.html" data-role="button" data-icon="search" data-iconpos="notext" class="user-add-ui-btn" rel="external">Search</a>
+            <a href="home.html" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn"  data-rel="back" rel="external">Back</a>
+            <h1>搜索</h1>
         </div>
 
         <div data-role="content" class="we-talk-style we-talk-style-content clear">
             <div class="message-holder">
-                <h2>官方推荐</h2>
+               <input id="search" type="text" data-type="search" name="search" value="" placeholder="搜索话题" class="ui-input-text ui-body-c">
 
-                <ul id="recommand_topic" data-role="listview" data-inset="true" class="we-talk-style-list clear topic-list">
+                <ul id="search_result" data-role="listview" data-inset="true" class="we-talk-style-list clear topic-list">
                 <!--    <li><a href="spitslot.html"><span class="topic-tittle">马航事件</span><span class="ui-li-count">25</span>
                         <br />
                         <span class="time">from 13-12-12 to 13-12-12</span>
@@ -46,43 +45,25 @@
                     <li><a href="spitslot.html"><span class="topic-tittle">天生SB</span><span class="ui-li-count">25</span>
                         <br />
                         <span class="time">from 13-12-12 to 13-12-12</span>
-                    </a></li>-->
+                    </a></li>   -->
                 </ul>
-            </div>
-            <div class="unreal message-holder">
-                <h2>你可能感兴趣</h2>
-
-                <ul id="interest_topic" data-role="listview" data-inset="true" class="we-talk-style-list clear topic-list">
-                <!--    <li><a href="#spitslot"><span class="topic-tittle">马航事件</span><span class="ui-li-count">25</span>
-                        <br />
-                        <span class="time">from 13-12-12 to 13-12-12</span>
-                    </a></li>
-                    <li><a href="#spitslot"><span class="topic-tittle">我是歌手</span><span class="ui-li-count">25</span>
-                        <br />
-                        <span class="time">from 13-12-12 to 13-12-12</span>
-                    </a></li>
-                    <li><a href="#spitslot"><span class="topic-tittle">天生SB</span><span class="ui-li-count">25</span>
-                        <br />
-                        <span class="time">from 13-12-12 to 13-12-12</span>
-                    </a></li>-->
-                </ul>
-            </div>
+            </div>            
         </div>
 
         <div data-role="footer" data-position="fixed" class="we-talk-style">
             <div data-role="navbar" class="we-talk-style-nav">
                 <ul>
                     <li>
-                        <a href="channel.html" data-icon="bullets" class="user-ui-btn">话题</a>
+                        <a href="channel.html" data-icon="bullets" class="user-ui-btn" rel="external">话题</a>
                     </li>
                     <li>
-                        <a href="discover.html" data-icon="eye" class="user-ui-btn">发现</a>
+                        <a href="discover.html" data-icon="eye" class="user-ui-btn" rel="external">发现</a>
                     </li>
                     <li>
-                        <a href="message.html" data-icon="comment" class="user-ui-btn">信息</a>
+                        <a href="message.html" data-icon="comment" class="user-ui-btn" rel="external">信息</a>
                     </li>
                     <li>
-                        <a href="home.html" data-icon="user" class="user-ui-btn">个人</a>
+                        <a href="home.html" data-icon="user" class="user-ui-btn" rel="external">个人</a>
                     </li>
                 </ul>
             </div>
@@ -90,6 +71,6 @@
 
     </div>
     <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript" src="../js/discover.js"></script>
+    <script type="text/javascript" src="../js/search.js"></script>
 </body>
 </html>

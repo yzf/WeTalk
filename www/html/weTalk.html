@@ -14,8 +14,6 @@
     <script type="text/javascript" src="../js/jquery.mobile-1.4.2.min.js"></script>
     <!--
 	<script type="text/javascript" src="cordova.js"></script>-->
-    <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript" src="../js/weTalk.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.4.2.min.css" />
     <link rel="stylesheet" type="text/css" href="../css/index.css" />
@@ -28,7 +26,7 @@
         <div data-role="header" data-position="fixed" class="we-talk-style we-talk-style-header">
             <a id="back_button" href="#" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn" data-rel="back">Back</a>
             <h1 id="hear_title"></h1>
-            <a href="#link" data-role="button" data-icon="plus" data-iconpos="notext" class="user-add-ui-btn">add</a>
+            <a href="createSplitslot.html" data-role="button" data-icon="plus" data-iconpos="notext" class="user-add-ui-btn" rel="external">add</a>
         </div>
 
         <div data-role="content" class="we-talk-style we-talk-style-content clear">
@@ -44,10 +42,10 @@
                 <div data-role="navbar" class="likeBox">
                     <ul>
                         <li>
-                            <a id="heart_num" href="#" data-icon="heart" data-iconpos="right"></a>
+                            <a id="heart_num" href="#" data-icon="heart" data-iconpos="right" rel="external"></a>
                         </li>
                         <li>
-                            <a id="comment_num" href="#" data-icon="comment" data-iconpos="right"></a>
+                            <a id="comment_num" href="#" data-icon="comment" data-iconpos="right" rel="external"></a>
                         </li>
                     </ul>
                 </div>
@@ -62,11 +60,13 @@
 
         </div>
         <div data-role="footer" data-position="fixed" class="we-talk-style we-talk-style-inputbox">
-            <a href="#" data-role="button" class="user-inputbox-ui-btn" data-icon="camera" data-iconpos="notext">photo</a>
-            <input name="detail" id="Text1" placeholder="输入您的图片配文..." />
-            <a href="#link" data-role="button" data-icon="plus" data-iconpos="left" class="add-groove">评论</a>
+        <!--    <a href="#" id="add_photo" data-role="button" class="user-inputbox-ui-btn" data-icon="camera" data-iconpos="notext">photo</a>-->
+            <input name="detail" id="Text1" placeholder="输入您的评论..." />
+            <a href="#link" id="add_comment" data-role="button" data-icon="plus" data-iconpos="left" class="add-groove" rel="external">评论</a>
         </div>
 
     </div>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/weTalk.js"></script>
 </body>
 </html>

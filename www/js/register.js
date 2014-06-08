@@ -47,7 +47,7 @@ $("#registerButton").bind('touchstart mousedown', function() {
 		var cb = function(result) {
 			if(result.status == 1) {
 			    // µ±«∞µÿ÷∑
-			    simpleJs.setCookie("sessionid", result["sessionid"]);
+			    simpleJs.setCookie(simpleJs.seesionid, result[simpleJs.seesionid]);			    
 			    simpleJs.fuzzyRedirect("home");
 			}
 			else {
