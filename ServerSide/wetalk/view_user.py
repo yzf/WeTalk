@@ -2,7 +2,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
-from django.contrib.sessions.models import Session
 from models import *
 import json, util
 
@@ -17,26 +16,28 @@ def register(request):
         如果成功，则返回
             {'status': 1,
              'info': 'ok',
-             'session_id': session的id}
         否则
             {'status': 0,
              'info': 'error'}
     其他:
-        注册成功后，session['user']保存着用户的个人信息
     '''
     data = {'status': 0, 'info': 'error'}
     try:
         user = User()
         user.username = request.REQUEST['username']
         user.password = request.REQUEST['password']
-        user.icon = Image.objects.get(id=1)#设置图像
+        user.icon = Image.objects.get(id=1)#设置默认头像
         if user.username.strip() == '' or user.password.strip() == '':
             raise # 账号或者密码为空
         user.save()# 插入数据
         user_data = user.toJsonFormat()
-        request.session['user'] = user_data
 
-        data['session_id'] = reqeust.session.session_key
+        auth = Auth()
+        auth.key = util.generate_random_string(32)
+        auth.data = json.dumps(user_data)
+        auth.save()
+
+        data['authkey'] = auth.key
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:
@@ -55,12 +56,10 @@ def login(request):
         如果成功，则返回
             {'status': 1,
              'info': 'ok',
-             'session_id': session的id}
         否则
             {'status': 0,
              'info': 'error'}
     其他:
-        登陆成功后，session['user']保存着用户的个人信息
     '''
     data = {'status': 0, 'info': 'error'}
     try:
@@ -69,9 +68,13 @@ def login(request):
 
         user = User.objects.get(username=username, password=password)
         user_data = user.toJsonFormat()
-        request.session['user'] = user_data
 
-        data['session_id'] = request.session.session_key
+        auth = Auth()
+        auth.key = util.generate_random_string(32)
+        auth.data = json.dumps(user_data)
+        auth.save()
+
+        data['authkey'] = auth.key
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:
@@ -85,10 +88,9 @@ def logout(request):
     '''
     data = {'status': 0, 'info': 'error'}
     try:
-        session_id = request.REQUEST['session_id']
-        session = Session.objects.get(session_key=session_id)
-        session.delete()
-
+        authkey = request.REQUEST['authkey']
+        auth = Auth.objects.get(key=authkey)
+        auth.delete()
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:
@@ -113,10 +115,9 @@ def user(request):
     '''
     data = {'status': 0, 'info': 'error'}
     try:
-        session_id = request.REQUEST['session_id']
-        session = Session.objects.get(session_key=session_id)
-
-        data['data'] = session.get_decoded()
+        authkey = request.REQUEST['authkey']
+        auth = Auth.objects.get(key=authkey)
+        data['data'] = json.loads(auth.data)
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:
@@ -125,25 +126,8 @@ def user(request):
     return HttpResponse(json.dumps(data))
 
 def user_update(request):
-    '''
-    修改用户信息
-
-    参数:
-        REQUEST
-            {'session_id': xxx,
-             'update': {'key': xxx,
-                        'value': xxx}}
-    返回值:
-
-    '''
     data = {'status': 0, 'info': 'error'}
     try:
-        session_id = request.REQUEST['session_id']
-        session = Session.objects.get(session_key=session_id)
-        user_data = session.get_decoded()['user']
-        user_id = int(user_data['id'])
-        user = User.objects.get(id=user_id)
-
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:

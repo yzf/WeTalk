@@ -1,6 +1,11 @@
 # coding: UTF-8
 from django.db import models
 # Create your models here.
+
+class Auth(models.Model):
+    key = models.CharField(max_length=32, unique=True)# 用户登陆后分配的key
+    data = models.TextField()# json格式的数据
+
 # 用户类
 class User(models.Model):
     icon = models.ForeignKey('wetalk.Image')# 图片名
@@ -122,7 +127,7 @@ class Spot(models.Model):
 class Comment(models.Model):
     creator = models.ForeignKey('wetalk.User')# 评论者，外键约束
     create_time = models.DateTimeField()# 发表时间
-    content = models.TextField()# 内容
+    content = models.TextField()# 内容            
 
     def __unicode__(self):
         return u'content: %s' % self.content

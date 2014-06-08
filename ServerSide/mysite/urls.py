@@ -20,10 +20,14 @@ urlpatterns = patterns('',
     # 与话题相关
     (r'^topic_list/', topic_list),
     (r'^topic_add/', topic_add),
+    (r'^discover_topic/', discover_topic),
+    (r'^search_topic/', search_topic),
     # 与槽点相关
     (r'^spot_list/', spot_list),
     # 与评论相关
     (r'^comment_list/', comment_list),
+    (r'^add_up/', add_up),
+    (r'^add_comments/', add_comments),
     # 与图片相关
     (r'^image_upload/', image_upload),
 )

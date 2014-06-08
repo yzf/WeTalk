@@ -31,10 +31,6 @@ def spot_list(request):
         start = int(request.REQUEST['start'])
         end = int(request.REQUEST['end'])
 
-        #topic_id = 1
-        #start = 0
-        #end = 2
-
         data['count'] = Topic.objects.get(id=topic_id).spots.count()
         sp_list = Topic.objects.get(id=topic_id).spots.all()[start:end]
         data['data'] = []
@@ -47,3 +43,4 @@ def spot_list(request):
         data['info'] = util.get_exception_message(e)
         print e
     return HttpResponse(json.dumps(data))
+

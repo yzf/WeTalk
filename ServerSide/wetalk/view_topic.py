@@ -31,9 +31,7 @@ def topic_list(request):
         cg = categories[int(request.REQUEST['category'])]
         start = int(request.REQUEST['start'])
         end = int(request.REQUEST['end'])
-        #cg = categories[0]
-        #start = 0
-        #end = 1
+
         data['count'] = Topic.objects.filter(category=cg).count()
         tp_list = Topic.objects.filter(category=cg).order_by('id')[start:end]
         data['data'] = []
@@ -46,12 +44,69 @@ def topic_list(request):
         print e
     return HttpResponse(json.dumps(data))
 
+
 # 添加话题
 def topic_add(request):
     data = {'status': 0, 'info': 'error'}
     try:
         topic = Topic()
-    except Exception, e:
+    except Exception as e:
+        data['info'] = util.get_exception_message(e)
+        print e
+    return HttpResponse(json.dumps(data))
+
+
+# get the topic list that is connect to the user
+def discover_topic(request):
+    data = {'status': 0, 'info': 'error'}
+    try:
+        # get the current user from database
+        authkey = request.REQUEST['authkey']
+        auth = Auth.objects.get(key=authkey)
+        cur_user = json.loads(auth.data)    # this return "an array" with the properties in an User object.
+        user_ = User.objects.get(id=cur_user['id'])
+
+        # set iTopic list and iTopic count
+        iTopic_list_ = user_.focus.all()
+        iTopic_count_ = user_.focus.count()
+        data['iTopic_count'] = iTopic_count_
+        data['iTopic_list'] = []
+        for it in iTopic_list_:
+            data['iTopic_list'].append(it.toJsonFormat())
+        
+        # set rTopic list and rTopic count
+        system_user = User.objects.get(username='admin@admin.com')
+        rTopic_list_ = Topic.objects.filter(creator=system_user)
+        rTopic_count_ = Topic.objects.filter(creator=system_user).count()
+        data['rTopic_count'] = rTopic_count_
+        data['rTopic_list'] = []
+        for rt in rTopic_list_:
+            data['rTopic_list'].append(rt.toJsonFormat())
+
+        data['status'] = 1
+        data['info'] = 'ok'
+    except Exception as e:
+        data['info'] = util.get_exception_message(e)
+        print e
+    return HttpResponse(json.dumps(data))
+
+
+def search_topic(request):
+    data = {'status': 0, 'info': 'error'}
+    try:
+        title_ = request.REQUEST['title']
+        # match the topic title contain key "title" from request
+        # "PorpertyName__contains" is a way offer from Django
+        topic_list = Topic.objects.filter(title__contains=title_)
+        topic_count = topic_list.count()
+        data['topic_count'] = topic_count
+        data['topic_list'] = []
+        for tl in topic_list:
+            data['topic_list'].append(tl.toJsonFormat())
+
+        data['status'] = 1
+        data['info'] = 'ok'
+    except Exception as e:
         data['info'] = util.get_exception_message(e)
         print e
     return HttpResponse(json.dumps(data))
