@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta content="email=no" name="format-detection" />
+     <!--
+    <meta name="viewport" content="user-scalable=yes, initial-scale=20, maximum-scale=20, minimum-scale=20, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    -->	
+    	
+        
+    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.mobile-1.4.2.min.js"></script>
+    <!--
+	<script type="text/javascript" src="cordova.js"></script>-->
+    <script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript" src="../js/spitslot.js"></script>
+        
+    <link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.4.2.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+
+    <title>Hello World</title>
+</head>
+<body>
+    <div data-role="page" id="spitslot">
+
+        <div data-role="header" data-position="fixed" class="we-talk-style we-talk-style-header">
+            <a href="#" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn" data-rel="back">Back</a>
+            <h1>马航事件</h1>
+            <a href="createSplitslot.html" data-role="button" data-icon="plus" data-iconpos="notext" class="user-add-ui-btn">add</a>
+        </div>
+
+        <div data-role="content" class="we-talk-style we-talk-style-content clear">
+            <ul id="spitslotList" data-inset="true" data-role="listview" class="we-talk-style-list clear ">                
+            </ul>
+        </div>
+
+        <div data-role="footer" data-position="fixed" class="we-talk-style we-talk-style-inputbox">
+            <a href="#" data-role="button" data-icon="camera" data-iconpos="notext" class="user-inputbox-ui-btn">photo</a>
+            <input name="detail" id="email" placeholder="输入您的图片配文..." />
+            <a href="#link" data-role="button" data-icon="plus" data-iconpos="left" class="add-groove">槽点</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
