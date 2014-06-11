@@ -176,3 +176,8 @@ $("#add_comment").bind("touchstart mousedown", function() {
 	var spitlotID = parseInt(window.location.href.substr((window.location.href.indexOf("=") + 1)));
 	addComment(spitlotID); 
 });
+
+// go back
+$("#goback").bind('touchstart mousedown', function() {
+    window.history.back();
+});

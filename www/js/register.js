@@ -4,6 +4,9 @@ $("#registerButton").bind('touchstart mousedown', function() {
 	var password_ = $("#registerPasswordInput").val();
 	var confirm_pwd = $("#registerConfirmPassword").val();
 	
+	alert(account_);
+	alert(password_);
+
 	if(account_.length == 0) {
 		alert("Account number is empty!");
 		return;

@@ -15,7 +15,7 @@
     <script type="text/javascript" src="../js/jquery.mobile-1.4.2.min.js"></script>
     <!--
 	<script type="text/javascript" src="cordova.js"></script>-->
-    <script type="text/javascript" src="../js/common.js"></script>
+    
         
     <link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.4.2.min.css" />
     <link rel="stylesheet" type="text/css" href="../css/index.css" />
@@ -25,38 +25,36 @@
 <body>
 	    <div data-role="page" id="home">
         <div data-role="header" data-position="fixed" class="we-talk-style we-talk-style-header">
-            <a href="home.html" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn" data-rel="back">Back</a>
+            <a id="goback" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn" data-rel="back">Back</a>
             <h1>yuanzhf</h1>
-            <a href="setting.html" data-role="button" data-icon="gear" data-iconpos="notext" class="user-add-ui-btn">Setting</a>
+            <a href="setting.html" data-role="button" data-icon="gear" data-iconpos="notext" class="user-add-ui-btn" rel="external">Setting</a>
         </div>
         <div data-role="content" class="we-talk-style we-talk-style-content clear">
             <div class="we-talk-style-info">
-                <img src="../images/portrait/1.jpg" />
+             <!--   <img src="../images/portrait/1.jpg" />    -->
+                <img id="image" src="" />
                 <div>
-                    <p class="information">
-                        我是个有故事的小孩子。
-					
+                    <p id="intro" class="information"></p>
+                    <p id="interest" class="keyword">
+                    <!--    关键词：<span>袁同学</span><span>张同学</span>-->
                     </p>
-                    <p class="keyword">
-                        关键词：<span>袁同学</span><span>张同学</span>
-                    </p>
-                </div>
+                </div> 
             </div>
             <div class="we-talk-style-view clear" data-role="navbar">
                 <ul>
                     <li>
-                        <a href="home.html">关注</a>
+                        <a href="home.html" rel="external">关注</a>
                     </li>
                     <li>
-                        <a href="home-comment.html">评论</a>
+                        <a href="home-comment.html?commentType=1" rel="external">评论</a>
                     </li>
                     <li>
-                        <a href="home-comment.html">收到评论</a>
+                        <a href="home-comment.html?commentType=2" rel="external">收到评论</a>
                     </li>
                 </ul>
             </div>
-			<ul data-role="listview" data-inset="true" class="we-talk-style-list clear topic-list">
-                <li><a href="spitslot.html"><span class="topic-tittle">马航事件</span><span class="ui-li-count">25</span>
+			<ul id="focus_topic" data-role="listview" data-inset="true" class="we-talk-style-list clear topic-list">
+            <!--    <li><a href="spitslot.html"><span class="topic-tittle">马航事件</span><span class="ui-li-count">25</span>
                     <br />
                     <span class="time">from 13-12-12 to 13-12-12</span>
                 </a></li>
@@ -68,6 +66,7 @@
                     <br />
                     <span class="time">from 13-12-12 to 13-12-12</span>
                 </a></li>
+				-->
             </ul>
             
         </div>
@@ -76,21 +75,23 @@
             <div data-role="navbar" class="we-talk-style-nav">
                 <ul>
                     <li>
-                        <a href="channel.html" data-icon="bullets" class="user-ui-btn">话题</a>
+                        <a href="channel.html" data-icon="bullets" class="user-ui-btn" rel="external">话题</a>
                     </li>
                     <li>
-                        <a href="discover.html" data-icon="eye" class="user-ui-btn">发现</a>
+                        <a href="discover.html" data-icon="eye" class="user-ui-btn" rel="external">发现</a>
                     </li>
                     <li>
-                        <a href="message.html" data-icon="comment" class="user-ui-btn">信息</a>
+                        <a href="message.html" data-icon="comment" class="user-ui-btn" rel="external">信息</a>
                     </li>
                     <li>
-                        <a href="home.html" data-icon="user" class="user-ui-btn">个人</a>
+                        <a href="home.html" data-icon="user" class="user-ui-btn" rel="external">个人</a>
                     </li>
                 </ul>
             </div>
         </div>
 
     </div>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/home.js"></script>
 </body>
 </html>

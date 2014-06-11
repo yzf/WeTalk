@@ -105,7 +105,7 @@ $(document).ready(function() {
 	    }
 	});
 	
-
+	
 	$("#saveSplitslot").bind('tap', function() {
 		if ($("#SplitslotTitle").val() != "" && $("#SplitslotContent").val() != "") {
 			var imgContainer = [];	// 数组用于存放已经选择的图片数据
@@ -114,19 +114,30 @@ $(document).ready(function() {
 				var imgHead = "data:image/jpeg;base64,";
 				imgContainer.push(that.attr("src").sub(imgHead.length));
 			});
-			
+			var authkey = simpleJs.getCookie(simpleJs.seesionid);
+			var now_ = new Date()
+			var curDate = "";
+			curDate += now_.getFullYear() + "-";
+			curDate += (now_.getMonth() + 1) + "-";
+			curDate += now_.getDate() + " ";
+			curDate += now_.getHours() + ":";
+			curDate += now_.getMinutes() + ":";
+			curDate += now_.getSeconds();
+
 			// 上传的数据
 			var sendData = {
+				authkey : authkey,
 				title: $("#SplitslotTitle").val(),
 				content: $("#SplitslotContent").val(),
 				topicID: simpleJs.getCookie("topicID"),
+				create_time : curDate,
 				imgs: imgContainer.join(";")	// 图片数据以';'间隔
 			};
 			
 			// 上传
 			simpleJs.ajaxPost(simpleJs.getURL("createSplitslot"), sendData, function(returnData){
 				// 回调函数，返回槽点ID
-				simpleJs.fuzzyRedirect("weTalk", '?spitlotID=' + result.data.id);
+				simpleJs.fuzzyRedirect("weTalk", '?spitlotID=' + result.spotID);
 			});
 			
 		} else {
@@ -135,4 +146,10 @@ $(document).ready(function() {
 
 	}); 
 
+});
+
+
+// go back
+$("#goback").bind('touchstart mousedown', function() {
+    window.history.back();
 });

@@ -29,9 +29,10 @@
         <div data-role="content" class="we-talk-style we-talk-style-content clear">
             <div class="unreal message-holder">
                 <h2>未读信息</h2>
-                <ul data-role="listview" data-inset="true" class="we-talk-style-list clear">
+                <ul id="unread_messages" data-role="listview" data-inset="true" class="we-talk-style-list clear">
+                <!--
                     <li class="person">
-                        <a href="messageDetail.html">
+                        <a href="messageDetail.html" rel="external">
                             <img src="../images/portrait/1.jpg">
                             <div>
                                 <span class="h2">袁同学</span><span class="time">13-12-12 09:08</span>
@@ -66,12 +67,14 @@
                             </p>
                         </a>
                     </li>
+                -->
                 </ul>
             </div>
 
             <div class="real message-holder">
                 <h2>已读信息</h2>
-                <ul data-role="listview" data-inset="true" class="we-talk-style-list clear">
+                <ul id="read_messages" data-role="listview" data-inset="true" class="we-talk-style-list clear">
+                <!-- 
                     <li class="person">
                         <a href="#">
                             <img src="../images/portrait/1.jpg">
@@ -108,6 +111,7 @@
                             </p>
                         </a>
                     </li>
+                -->
                 </ul>
             </div>
         </div>
@@ -116,16 +120,16 @@
             <div data-role="navbar" class="we-talk-style-nav">
                 <ul>
                     <li>
-                        <a href="channel.html" data-icon="bullets" class="user-ui-btn">话题</a>
+                        <a href="channel.html" data-icon="bullets" class="user-ui-btn" rel="external">话题</a>
                     </li>
                     <li>
-                        <a href="discover.html" data-icon="eye" class="user-ui-btn">发现</a>
+                        <a href="discover.html" data-icon="eye" class="user-ui-btn" rel="external">发现</a>
                     </li>
                     <li>
-                        <a href="message.html" data-icon="comment" class="user-ui-btn">信息</a>
+                        <a href="message.html" data-icon="comment" class="user-ui-btn" rel="external">信息</a>
                     </li>
                     <li>
-                        <a href="home.html" data-icon="user" class="user-ui-btn">个人</a>
+                        <a href="home.html" data-icon="user" class="user-ui-btn" rel="external">个人</a>
                     </li>
                 </ul>
             </div>
@@ -133,6 +137,7 @@
 
     </div>
 
+    <!--
         <div data-role="header" data-position="fixed" class="we-talk-style we-talk-style-header">
             <h1>信息</h1>
         </div>
@@ -221,5 +226,7 @@
                 </ul>
             </div>
         </div>
+    -->
+    <script type="text/javascript" src="../js/message.js"></script>
 </body>
 </html>

@@ -15,7 +15,7 @@
     <!--
 	<script type="text/javascript" src="cordova.js"></script>-->
     <script type="text/javascript" src="../js/common.js"></script>
-        
+
     <link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.4.2.min.css" />
     <link rel="stylesheet" type="text/css" href="../css/index.css" />
 
@@ -24,39 +24,40 @@
 <body>
 	<div data-role="page" id="home-comment">
         <div data-role="header" data-position="fixed" class="we-talk-style we-talk-style-header">
-            <a href="home.html" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn" data-rel="back">Back</a>
+            <a id="goback" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn" data-rel="back" rel="external">Back</a>
             <h1>yuanzhf</h1>
-            <a href="setting.html" data-role="button" data-icon="gear" data-iconpos="notext" class="user-add-ui-btn">Setting</a>
+            <a href="setting.html" data-role="button" data-icon="gear" data-iconpos="notext" class="user-add-ui-btn" rel="external">Setting</a>
         </div>
         <div data-role="content" class="we-talk-style we-talk-style-content clear">
             <div class="we-talk-style-info">
-                <img src="../images/portrait/1.jpg" />
+                <img id="image" src="" />
                 <div>
-                    <p class="information">
-                        我是个有故事的小孩子。
-					
-                    </p>
-                    <p class="keyword">
-                        关键词：<span>袁同学</span><span>张同学</span>
+                    <p id="intro" class="information"></p>
+                    <p id="interest" class="keyword">
+                    <!--    关键词：<span>袁同学</span><span>张同学</span> -->
                     </p>
                 </div>
             </div>
             <div class="we-talk-style-view clear" data-role="navbar">
                 <ul>
                     <li>
-                        <a href="home.html">关注</a>
+                        <a href="home.html" rel="external">关注</a>
                     </li>
                     <li>
-                        <a href="home-comment.html">评论</a>
+                        <a href="home-comment.html?commentType=1" rel="external">评论</a>
                     </li>
                     <li>
-                        <a href="home-comment.html">收到评论</a>
+                        <a href="home-comment.html?commentType=2" rel="external">收到评论</a>
                     </li>
                 </ul>
             </div>
+            <div id="comments_here">
+            <!--
             <div class="comment-holder">
                 <div class="we-talk-style-itemshow">
-                    <div class="maincontent">
+                    <div id="comments_here" class="maincontent">
+
+                        
                         <div class="talker-info">
                             <img src="../images/portrait/1.jpg" />
                             <div class="user">
@@ -95,26 +96,29 @@
                                 </li>
                             </ul>
                         </div>
+                    
+
                     </div>
                 </div>
             </div>
-
+            -->
+            </div>
         </div>
 
         <div data-role="footer" data-position="fixed" class="we-talk-style">
             <div data-role="navbar" class="we-talk-style-nav">
                 <ul>
                     <li>
-                        <a href="channel.html" data-icon="bullets" class="user-ui-btn">话题</a>
+                        <a href="channel.html" data-icon="bullets" class="user-ui-btn" rel="external">话题</a>
                     </li>
                     <li>
-                        <a href="discover.html" data-icon="eye" class="user-ui-btn">发现</a>
+                        <a href="discover.html" data-icon="eye" class="user-ui-btn" rel="external">发现</a>
                     </li>
                     <li>
-                        <a href="message.html" data-icon="comment" class="user-ui-btn">信息</a>
+                        <a href="message.html" data-icon="comment" class="user-ui-btn" rel="external">信息</a>
                     </li>
                     <li>
-                        <a href="home.html" data-icon="user" class="user-ui-btn">个人</a>
+                        <a href="home.html" data-icon="user" class="user-ui-btn" rel="external">个人</a>
                     </li>
                 </ul>
             </div>
@@ -122,5 +126,6 @@
 
     </div>
 
+    <script type="text/javascript" src="../js/home-comment.js"></script>
 </body>
 </html>

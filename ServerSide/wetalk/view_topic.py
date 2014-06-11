@@ -56,7 +56,7 @@ def topic_add(request):
     return HttpResponse(json.dumps(data))
 
 
-# get the topic list that is connect to the user
+# get the topic list that is connect to the user --discover.js and discover.html
 def discover_topic(request):
     data = {'status': 0, 'info': 'error'}
     try:
@@ -75,9 +75,17 @@ def discover_topic(request):
             data['iTopic_list'].append(it.toJsonFormat())
         
         # set rTopic list and rTopic count
+        # recommend topic according to topic category 
+        # if this is empty, recommend the topic created by admin@admin.com
         system_user = User.objects.get(username='admin@admin.com')
-        rTopic_list_ = Topic.objects.filter(creator=system_user)
-        rTopic_count_ = Topic.objects.filter(creator=system_user).count()
+        rTopic_list_ = Topic.objects.filter(category=user_.interest)
+        rTopic_count_ = rTopic_list_.count()
+        print rTopic_count_
+        
+        if rTopic_count_ == 0:
+            rTopic_list_ = Topic.objects.filter(creator=system_user)
+            rTopic_count_ = rTopic_list_.count()
+        
         data['rTopic_count'] = rTopic_count_
         data['rTopic_list'] = []
         for rt in rTopic_list_:
@@ -90,7 +98,8 @@ def discover_topic(request):
         print e
     return HttpResponse(json.dumps(data))
 
-
+	
+# search topics base on title  --search.js and search.html
 def search_topic(request):
     data = {'status': 0, 'info': 'error'}
     try:
@@ -104,6 +113,54 @@ def search_topic(request):
         for tl in topic_list:
             data['topic_list'].append(tl.toJsonFormat())
 
+        data['status'] = 1
+        data['info'] = 'ok'
+    except Exception as e:
+        data['info'] = util.get_exception_message(e)
+        print e
+    return HttpResponse(json.dumps(data))
+
+# get topic according to user focus	--home.js and home.html
+def	userFocus_topic(request):
+    data = {'status': 0, 'info': 'error'}
+    try:
+        authkey = request.REQUEST['authkey']
+        auth = Auth.objects.get(key=authkey)
+        cur_user = json.loads(auth.data)    # this return "an array" with the properties in an User object.
+        user_ = User.objects.get(id=cur_user['id'])
+
+        fTopic_list_ = user_.focus.all()
+        fTopic_count_ = user_.focus.count()
+        data['fTopic_count'] = fTopic_count_
+        data['fTopic_list'] = []
+        for ft in fTopic_list_:
+            data['fTopic_list'].append(ft.toJsonFormat());
+        data['status'] = 1
+        data['info'] = 'ok'
+    except Exception as e:
+        data['info'] = util.get_exception_message(e)
+        print e
+    return HttpResponse(json.dumps(data))
+
+
+# create topic
+def createTopic(request):
+    data = {'status': 0, 'info': 'error'}
+    try:
+        authkey = request.REQUEST['authkey']
+        auth = Auth.objects.get(key=authkey)
+        cur_user = json.loads(auth.data)             # this is the json format User, not a class type User
+        user_ = User.objects.get(id=cur_user['id'])
+
+        create_time = request.REQUEST['create_time']
+        title = request.REQUEST['title']
+        begin_time = request.REQUEST['startTime']
+        end_time = request.REQUEST['endTime']
+
+        new_topic = Topic(creator=user_, create_time=create_time, category="", title=title, begin_time=begin_time, end_time=end_time)
+        new_topic.save()
+
+        data['topicID'] = new_topic.id
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:

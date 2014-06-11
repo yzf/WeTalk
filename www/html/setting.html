@@ -12,8 +12,8 @@
         
     <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../js/jquery.mobile-1.4.2.min.js"></script>
-    <!--
-	<script type="text/javascript" src="cordova.js"></script>-->
+    
+	<script type="text/javascript" src="../js/cordova.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
         
     <link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.4.2.min.css" />
@@ -25,29 +25,26 @@
 	
     <div data-role="page" id="setting">
         <div data-role="header" data-position="fixed" class="we-talk-style we-talk-style-header">
-            <a href="home.html" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn"  data-rel="back">Back</a>
+            <a id="goback" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn"  data-rel="back" rel="external">Back</a>
             <h1>设置</h1>
         </div>
         <div data-role="content" class="we-talk-style we-talk-style-content clear">
             <div class="we-talk-style-info">
-                <img src="../images/portrait/1.jpg" />
+                <img id="image" src="" />
                 <div>
-                    <p class="nickname h2">
-                        yuanzhf
-					
+                    <p id="name" class="nickname h2">
                     </p>
-                    <p class="information">
-                        yuanzhf@qq.com
-					
+                    <p id="info" class="information">
                     </p>
                 </div>
             </div>
             <div class="setting clear">
                 <ul data-role="listview">
-                    <li><a href="settingInof.html" class="setting-list-item">修改用户名</a></li>
-                    <li><a href="#">修改密码</a></li>
-                    <li><a href="#">修改简介</a></li>
-                    <li><a href="#">修改关键词</a></li>
+                    <li><a href="settingInfo.html?InfoType=0" class="setting-list-item" rel="external">修改用户名</a></li>
+                    <li><a href="settingInfo.html?InfoType=1" class="setting-list-item" rel="external">修改密码</a></li>
+                    <li><a href="settingInfo.html?InfoType=2" class="setting-list-item" rel="external">修改简介</a></li>
+                    <li><a href="settingInfo.html?InfoType=3" class="setting-list-item" rel="external">修改兴趣</a></li>
+                    <li><a href="settingInfo.html?InfoType=4" class="setting-list-item" rel="external">修改头像</a></li>
                 </ul>
                 <div class="logout">
                     <a href="javascript:void(0);" id="logout" class="inputbox-button" data-role="button" data-inline="false" data-theme="b">退出</a>
@@ -55,6 +52,6 @@
             </div>
         </div>
     </div>
-    
+    <script type="text/javascript" src="../js/setting.js"></script>
 </body>
 </html>

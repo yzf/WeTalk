@@ -49,3 +49,9 @@ $(document).ready(function() {
 	getMessage(topicID);
 
 });
+
+
+// go back
+$("#goback").bind('touchstart mousedown', function() {
+	window.history.back();
+});

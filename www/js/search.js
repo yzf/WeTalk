@@ -31,3 +31,8 @@ $("#search").bind('change', function(){
 	var title = $("#search").val();
 	getMessage(title);
 });
+
+// go back
+$("#goback").bind('touchstart mousedown', function() {
+    window.history.back();
+});

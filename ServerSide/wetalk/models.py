@@ -38,10 +38,20 @@ class Message(models.Model):
     from_user = models.ForeignKey('wetalk.User', related_name='from_user')# 发送方，外键约束
     is_read = models.BooleanField(default=False)# 是否已读
     content = models.TextField()# 内容
+    create_time = models.DateTimeField()#创建时间
 
     def __unicode__(self):
         return u'content: %s' % self.content
 
+    def toJsonFormat(self):
+        ret = {}
+        ret['id'] = self.id
+        ret['to_user'] = self.to_user.toJsonFormat()
+        ret['from_user'] = self.from_user.toJsonFormat()
+        ret['is_read'] = self.is_read
+        ret['content'] = self.content
+        ret['create_time'] = self.create_time
+        return ret
 
 
 # 图片

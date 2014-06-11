@@ -25,32 +25,28 @@
 	
     <div data-role="page" id="messageDetail">
         <div data-role="header" data-position="fixed" class="we-talk-style we-talk-style-header">
-            <a href="message.html" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn"  data-rel="back">Back</a>
-            <h1>大袁同学</h1>
+            <a href="message.html" data-role="button" data-icon="carat-l" data-iconpos="notext" class="user-add-ui-btn"  data-rel="back" rel="external">Back</a>
+            <h1 id="to_user"></h1>
         </div>
         <div data-role="content" class="we-talk-style we-talk-style-content clear">
             <div class="we-talk-style-itemshow">
                 <div class="maincontent">
                     <div class="talker-info">
-                        <img src="../images/portrait/1.jpg" />
+                        <img id="from_user_icon" src="" />
                         <div class="user">
-                            <span class="h3">大袁同学</span>
+                            <span id="from_user" class="h3"></span>
                             <br />
-                            <span class="time">1个小时前</span>
+                            <span id="create_time" class="time"></span>
                         </div>
                     </div>
                     <div class="show-info">
-                    	<h2>消息主题</h2>
-                        <p>
-                            新闻发言人SB新闻发言人SB新闻发言人SB新闻发言人SB
-                            新闻发言人SB新闻发言人SB新闻发言人SB新闻发言人SB
-                            新闻发言人SB新闻发言人SB新闻发言人SB新闻发言人SB
-                        </p>
+                    	<h2>消息内容</h2>
+                        <p id="content"></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <script type="text/javascript" src="../js/messageDetail.js"></script>
 </body>
 </html>

@@ -96,3 +96,71 @@ def add_comments(request):
         data['info'] = util.get_exception_message(e)
         print e
     return HttpResponse(json.dumps(data))    
+
+
+# get comments that user gives out --home-comment.js and home-comment.html
+def home_ownComment(request):
+    data = {'status': 0, 'info': 'error'}
+    try:
+        # get current user
+        authkey = request.REQUEST['authkey']
+        auth = Auth.objects.get(key=authkey)
+        cur_user = json.loads(auth.data)    # this return "an array" with the properties in an User object.
+        user_ = User.objects.get(id=cur_user['id'])
+
+        # the comment need to corespond to a spot, so we need to find out the comment and spot together 
+        comment_list = Comment.objects.filter(creator=user_)
+        comment_count = Comment.objects.filter(creator=user_).count()
+        data['comment_count'] = comment_count
+        
+        # as the comment_list and cor_spots in the correct coresponding order, so we can return this to js
+        data['comment_list'] = []
+        data['cor_spots'] = []
+        for cl in comment_list:
+            data['comment_list'].append(cl.toJsonFormat())
+            print 'comment_list'
+            # here is the problem
+            cor_spot = cl.spot_set.all()       # get the first one, in fact there is only one, but the return is a struct of arrary
+            for cors in cor_spot:
+                print 'cor_spots'
+                data['cor_spots'].append(cors.toJsonFormat(show_comment=True))
+
+        data['status'] = 1
+        data['info'] = 'ok'
+    except Exception as e:
+        data['info'] = util.get_exception_message(e)
+        print e
+    return HttpResponse(json.dumps(data))
+
+
+# get comments that received from others which spot is created by this user
+def home_receiveComment(request):
+    data = {'status': 0, 'info': 'error'}
+    try:
+        # get current user
+        authkey = request.REQUEST['authkey']
+        auth = Auth.objects.get(key=authkey)
+        cur_user = json.loads(auth.data)    # this return "an array" with the properties in an User object.
+        user_ = User.objects.get(id=cur_user['id'])
+        data['cur_user'] = user_.toJsonFormat()
+        # the comment need to corespond to a spot, so we need to find out the comment and spot together
+        own_spots = Spot.objects.filter(creator=user_)
+        data['spots_count'] = own_spots.count()
+        data['cor_spots'] = []
+        for cs in own_spots:
+            # here need to cancl the comment created by user_, but can not do this here
+            data['cor_spots'].append(cs.toJsonFormat(show_comment=True, start=0, end=10))   # get the first 10 
+
+        data['status'] = 1
+        data['info'] = 'ok'
+    except Exception as e:
+        data['info'] = util.get_exception_message(e)
+        print e
+    return HttpResponse(json.dumps(data))
+
+	
+	
+	
+
+
+	
