@@ -26,6 +26,7 @@ urlpatterns = patterns('',
     (r'^search_topic/', search_topic),
 	(r'^userFocus_topic/', userFocus_topic),
     (r'^createTopic/', createTopic),
+    (r'^get_Topic/', get_Topic),
     # 与槽点相关
     (r'^spot_list/', spot_list),
     (r'^createSplitslot/', createSplitslot),

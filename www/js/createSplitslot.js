@@ -112,7 +112,7 @@ $(document).ready(function() {
 			$("#picturesBox .showImage").each(function() {	// 获取图片数据
 				var that = $(this);
 				var imgHead = "data:image/jpeg;base64,";
-				imgContainer.push(that.attr("src").sub(imgHead.length));
+				imgContainer.push(that.attr("src").substr(imgHead.length));
 			});
 			var authkey = simpleJs.getCookie(simpleJs.seesionid);
 			var now_ = new Date()

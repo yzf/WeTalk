@@ -1,5 +1,7 @@
 // show current user's info
 $(document).ready(function() {
+	
+	
     var authkey = simpleJs.getCookie(simpleJs.seesionid);
 
 	// user info
@@ -33,13 +35,12 @@ $("#goback").bind('touchend', function() {
 
 // for logout
 $("#logout").bind('touchend', function() {
-	var authkey = simpleJs.getCookie(simpleJs.seesionid);
 	var logout = function(authkey) {
 		var requestUrl = hosturl + "logout/";
 		var requestData = { authkey : authkey }; 
 		var cb = function(result) {
 			if(parseInt(result.status) == 1) {
-				simpleJs.fuzzyRedirect("login");
+			//	simpleJs.fuzzyRedirect("login");
 			}
 			else {
 				alert(result.info);
@@ -49,7 +50,9 @@ $("#logout").bind('touchend', function() {
 		simpleJs.ajaxPost(requestUrl, requestData, cb);
 	};
 	
-	localStorage.removeItem("authkey");
+	var authkey = simpleJs.getCookie(simpleJs.seesionid);
 	logout(authkey);
+	localStorage.removeItem("authkey");
+	simpleJs.fuzzyRedirect("login");
 	//navigator.app.exitApp();
 });

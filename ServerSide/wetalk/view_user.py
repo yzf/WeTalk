@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.core import serializers
 from models import *
 import json, string, random, util
+import base64
 
 def register(request):
     '''
@@ -153,20 +154,20 @@ def user_update(request):
             user_.intro = infoText
         if infoType == '3':
             user_.interest = infoText
-        if infoType == '4':
-            # 解码images并保存到数据库，及关联到new_spot
+        if infoType == '4':          
             img_name = ''.join([random.choice(string.ascii_letters + string.digits) \
                            for i in range(15)])
-            img_url = 'resource/images/' + img_name + '.png'
-            #pic = cStringIO.StringIO()
+            img_url = 'resource/images/' + img_name + '.jpeg'
+            #pic = cStringIO.StringIO() 
             #image_string = cStringIO.StringIO(base64.b64decode(infoText))
+            # 解码images并保存到数据库，及关联到user_
             imgData = base64.b64decode(infoText)
-            leniyimg = open(img_url,'wb')
-            leniyimg.write(imgData)
-            leniyimg.close()
-            #image.save(pic, il.format, quality=100)
-            #user_.icon = image
-            #pic.seek(0)
+            tmp = open(img_url,'wb')
+            tmp.write(imgData)
+            tmp.close()
+            image = Image(url=img_url)
+            image.save()
+            user_.icon = image
         user_.save()
         
         data['user'] = user_.toJsonFormat()

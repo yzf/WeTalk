@@ -12,10 +12,8 @@ $(document).ready(function() {
         var cb = function (result, requestData) {
 			cur += length;
 			if (result.status == "1" || result.status == 1) {
-				// 添加标题
 				$("#hear_title").html(result.data.title);
 				
-				// 槽点原文
 				var creator_ = [];
 				creator_.push('<img src="' + img_url + result.data.creator.icon.url + '" />');
 				creator_.push('<div class="user">');
@@ -39,7 +37,6 @@ $(document).ready(function() {
 				$("#heart_num").html(result.data.up);
 				$("#comment_num").html(result.data.comments.length);
 				
-				// 评论
 				var comment_ = [];
 				for(var i = 0; i < result.data.comments.length; i++) {
 					comment_.push('<li data-icon="false"><a href="#" >');
@@ -61,12 +58,11 @@ $(document).ready(function() {
 					comment_.push('</a></li>');
 				}
 				
-				comment_ = comment_.join("");	// 转换成一个字符串
+				comment_ = comment_.join("");
 				$("#comment_List").append(comment_);
 				$("#comment_List").listview('refresh');
 			}
 			else {
-				// 失败的情况，弹框显示
 			}
 			
         };
@@ -74,7 +70,6 @@ $(document).ready(function() {
         simpleJs.ajaxPost(requestUrl, requestData, cb);
 	};
 	
-	// 通过url获取当前的spitlotID
 	var spitlotID = parseInt(window.location.href.substr((window.location.href.indexOf("=") + 1)));
 	getMessage(spitlotID);
 	
@@ -180,6 +175,27 @@ $("#add_comment").bind('touchend', function() {
 /*
 // go back
 $("#goback").bind('touchend', function() {
-    window.history.back();
+	var topicID = '';
+	var goBackTopic = function(spitlotID) {
+		var requestUrl = hosturl + "get_Topic/";
+		var requestData = { spitlotID : spitlotID };
+		var cb = function(result) {
+			if(parseInt(result.status) == 1) {
+				topicID = result.topicID;
+				alert(topicID);
+			}
+			else {
+				alert(result.info);
+			}
+		};
+
+		simpleJs.ajaxPost(requestUrl, requestData, cb);
+	};
+
+    var spitlotID = parseInt(window.location.href.substr((window.location.href.indexOf("=") + 1)));
+    goBackTopic(spitlotID);
+    if(topicID != '') {
+    	simpleJs.fuzzyRedirect("spitslot", "?topicID=" + topicID);
+    }
 });
 */

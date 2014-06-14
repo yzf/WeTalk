@@ -1,7 +1,9 @@
+var isPhoteChange = false;
+
 // setting user info
 $(document).ready(function() {
 	/************************** get photo *******************************************/
-	var isPhoteChange = false;
+	//var isPhoteChange = false;
 	var pictureSource;
 	//图片来源
 	var destinationType;
@@ -104,7 +106,7 @@ $(document).ready(function() {
 
 
 // go back
-$("#goback").bind('touchend', function() {
+$("#goback").bind('tap', function() {
 	var ModifyInfo = function(authkey, infoType, infoText) {
         var requestUrl = hosturl + "user_update/";     // def modify_user_info in view_user.py
         var requestData = {
@@ -126,21 +128,23 @@ $("#goback").bind('touchend', function() {
         
         simpleJs.ajaxPost(requestUrl, requestData, cb);
     };
-     
+    
     var authkey = simpleJs.getCookie(simpleJs.seesionid);
 	var infoType = parseInt(window.location.href.substr((window.location.href.indexOf("=") + 1)));
     var infoText = '';
+
     if (infoType == 0 || infoType == 1 || infoType == 2 || infoType == 3) {
      	infoText = $("#fname").val();
     } else if (infoType == 4 && isPhoteChange == true) {
     	var imgHead = "data:image/jpeg;base64,";
-		infoText = $("#image").attr("src").sub(imgHead.length);
+		infoText = $("#image").attr("src").substr(imgHead.length);
     }
-    
-    if(infoText == "") {
-        simpleJs.fuzzyRedirect("setting");
+
+    if(infoText == '') {
+        //simpleJs.fuzzyRedirect("setting");
         //window.history.back();
     } else {
     	ModifyInfo(authkey, infoType, infoText);
+        //simpleJs.fuzzyRedirect("setting");
     }
 });

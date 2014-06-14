@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
 from models import *
-import json, util
+import json, util, string, random
 import base64
 
 def spot_list(request):
@@ -66,23 +66,53 @@ def createSplitslot(request):
 
         # 创建新的spot，但未关联对应的images
         new_spot = Spot(creator=user_, create_time=createTime, title=title, content=content, up=0)
+        new_spot.save()
+
+        image_strings = request.REQUEST['imgs']
 
         # 解码images并保存到数据库，及关联到new_spot
-        pic = cStringIO.StringIO()
-        image_string = cStringIO.StringIO(base64.b64decode(request.POST['imgs']))
-        imageList = image_string.split(';')
+        imageList = image_strings.split(';')
         for il in imageList:
-            image.save(pic, il.format, quality=100)
+            img_name = ''.join([random.choice(string.ascii_letters + string.digits) \
+                           for i in range(15)])
+            img_url = 'resource/images/' + img_name + '.jpeg'
+            
+            imgData = base64.b64decode(il)
+            tmp = open(img_url,'wb')
+            tmp.write(imgData)
+            tmp.close()
+            image = Image(url=img_url)
+            image.save()
+            print image.url
             new_spot.imgs.add(image)
-        pic.seek(0)
-
+        
         # 关联new_spot与对应的topic
         new_spot.save()
         topic = Topic.objects.get(id=topicID)
         topic.spots.add(new_spot)
-
+        topic.save()
+        
         data['spotID'] = new_spot.id
         data['status'] = 1 
+        data['info'] = 'ok'
+    except Exception as e:
+        data['info'] = util.get_exception_message(e)
+        print e
+    return HttpResponse(json.dumps(data))
+
+
+# get topic by the spot id ()   --weTalk.js
+def get_Topic(request):
+    data = {'status': 0, 'info': 'error'}
+    try:
+        spotID = request.REQUEST['spitlotID']
+        spot_ = Spot.objects.get(id=spotID)
+        topicList = spot_.topic_set.all()   # acttrually only one
+        topicID = ''
+        for tl in topicList:
+            topicID = tl.id
+        data['topicID'] = topicID
+        data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:
         data['info'] = util.get_exception_message(e)

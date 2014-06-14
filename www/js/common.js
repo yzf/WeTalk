@@ -1,4 +1,3 @@
-
 var simpleJs = {
     seesionid : "authkey"
 };
@@ -43,7 +42,7 @@ simpleJs.ajaxPost = function(requestUrl, requestData, callBack, errorNotice, asy
 		},
 		error: errorNotice || function (XMLHttpRequest, textStatus, errorThrown) {
             //alert("common.js find error 2");
-		    alert(textStatus);
+		    //alert(textStatus);
 		},
 		complete: complete_function || function(){}
 	});
@@ -126,4 +125,14 @@ simpleJs.getCookie = function (c_name) {
     } else {
     	return "";
     }
+};
+
+
+var checkLogin = function() {
+    if(localStorage.length == 0) {
+        alert("请先登录");
+        simpleJs.fuzzyRedirect("login");
+        return true;
+    }
+    return false;
 };
