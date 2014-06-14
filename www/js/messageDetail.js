@@ -6,7 +6,7 @@ $(document).ready(function() {
         var cb = function(result) {
             if(parseInt(result.status) == 1) {
                 $("#to_user").html(result.message.to_user.name);
-                $("#from_user_icon").attr("src", result.message.from_user.icon.url);
+                $("#from_user_icon").attr("src", hosturl + result.message.from_user.icon.url);
                 $("#from_user").html(result.message.from_user.name);
                 $("#create_time").html(result.message.create_time);
                 $("#content").html(result.message.content);

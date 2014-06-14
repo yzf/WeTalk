@@ -134,11 +134,17 @@ $(document).ready(function() {
 				imgs: imgContainer.join(";")	// 图片数据以';'间隔
 			};
 			
+			var cb = function(result) {
+				if(parseInt(result.status) == 1) {
+					simpleJs.fuzzyRedirect("weTalk", '?spitlotID=' + result.spotID);
+				}
+				else {
+					alert(result.info);
+				}
+			};
+
 			// 上传
-			simpleJs.ajaxPost(simpleJs.getURL("createSplitslot"), sendData, function(returnData){
-				// 回调函数，返回槽点ID
-				simpleJs.fuzzyRedirect("weTalk", '?spitlotID=' + result.spotID);
-			});
+			simpleJs.ajaxPost(simpleJs.getURL("createSplitslot"), sendData, cb);
 			
 		} else {
 			alert("Title or Content is null.");
@@ -148,8 +154,9 @@ $(document).ready(function() {
 
 });
 
-
-// go back
-$("#goback").bind('touchstart mousedown', function() {
+/*
+// go back 
+$("#goback").bind('touchend', function() {
     window.history.back();
 });
+*/

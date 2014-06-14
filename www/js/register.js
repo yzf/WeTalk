@@ -1,4 +1,4 @@
-$("#registerButton").bind('touchstart mousedown', function() {
+$("#registerButton").bind('touchend', function() {
 	// 判断登陆界面输入的账号和密码是否存在为空
 	var account_ = $("#registerAccountInput").val();
 	var password_ = $("#registerPasswordInput").val();

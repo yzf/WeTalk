@@ -12,6 +12,7 @@ $(document).ready(function() {
         var cb = function (result, requestData) {
 			cur += length;
 			if (result.status == "1" || result.status == 1) {
+				$("#title").html(result.topic.title);
 				var html = [];
 				for(var i = 0; i < result.count; i++) {
 					html.push('<li class="topic"><a href="weTalk.html?spitlotID=' + result.data[i].id + '" rel="external">');
@@ -30,12 +31,12 @@ $(document).ready(function() {
 					html.push('</a></li>');
 				}
 
-				html = html.join("");	// ×ª»»³ÉÒ»¸ö×Ö·û´®
+				html = html.join("");
 				$("#spitslotList").append(html);
 				$("#spitslotList").listview('refresh');
 			}
 			else {
-				// Ê§°ÜµÄÇé¿ö£¬µ¯¿òÏÔÊ¾
+				alert(result.info);
 			}
 
         };
@@ -43,15 +44,15 @@ $(document).ready(function() {
         simpleJs.ajaxPost(requestUrl, requestData, cb);
 	};
 
-	// Í¨¹ýurl»ñÈ¡µ±Ç°µÄtopicID
 	var topicID = parseInt(window.location.href.substr((window.location.href.indexOf("=") + 1)));
 	simpleJs.setCookie("topicID", topicID);
 	getMessage(topicID);
 
 });
 
-
+/*
 // go back
-$("#goback").bind('touchstart mousedown', function() {
+$("#goback").bind('touchend', function() {
 	window.history.back();
 });
+*/

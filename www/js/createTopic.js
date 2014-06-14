@@ -15,6 +15,13 @@ $(document).ready(function() {
 			curDate += now_.getMinutes() + ":";
 			curDate += now_.getSeconds();
 
+			var sd = new Date(Date.parse($("#startTime").val()));
+			var ed = new Date(Date.parse($("#endTime").val()));
+			if(ed < sd) {
+				alert("结束时间早于开始时间");
+				return;
+			}
+
 			var sendData = {
 				authkey : authkey,
 				create_time : curDate,
@@ -23,17 +30,24 @@ $(document).ready(function() {
 				endTime: $("#endTime").val()
 			};
 			
+			var cb = function(result) {
+				if(parseInt(result.status) == 1) {
+					simpleJs.fuzzyRedirect("spitslot", '?topicID=' + result.topicID);
+				}
+				else {
+					alert(result.info);
+				}
+			};
+
 			// 上传
-			simpleJs.ajaxPost(simpleJs.getURL("createTopic"), sendData, function(returnData){
-				// 回调函数，返回ID
-				simpleJs.fuzzyRedirect("spitslot", '?topicID=' + result.topicID);
-			});
+			simpleJs.ajaxPost(simpleJs.getURL("createTopic"), sendData, cb);
 		}
 	});
 });
 
-
+/*
 // go back
-$("#goback").bind('touchstart mousedown', function() {
+$("#goback").bind('touchend', function() {
     window.history.back();
 });
+*/

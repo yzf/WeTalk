@@ -2,16 +2,14 @@ $(document).ready(function() {
 	var cur = 0;
 	var len = 10;
 	var getMessage = function(cgy) {
-		// �����������ʱ���͸�����������
 		var requestData = {
             category : cgy,
             start : cur,
 			end : cur + len
         };
-        // ������ݵĵ�ַ
+
 		var requestUrl = hosturl + "topic_list/";
 		
-		// �ص�����ѷ��������ص���ݷ���result�У��������ݽṹ������������
         var cb = function (result, requestData) {
 			cur += length;
 			if (result.status == "1" || result.status == 1) {
@@ -26,26 +24,24 @@ $(document).ready(function() {
 					html.push('</a></li>'); 
 				}
 				
-				html = html.join("");	// ת����һ���ַ�
+				html = html.join("");
 				$("#topicList").append(html);
 				$("#topicList").listview('refresh');
 			}
 			else {
-				// ʧ�ܵ������������ʾ
+				alert(result.info);
 			}
 			
         };
-	
-		// ����������󣬲����ַ���������������ݡ��ص�����
+
         simpleJs.ajaxPost(requestUrl, requestData, cb);
 	};
 	
 	var startPage = 0;
 	
-	// ��һ�μ���Ĭ��
 	getMessage(startPage);
 	
-	$("#listV li a").bind('touchstart mousedown', function () {
+	$("#listV li a").bind('touchend', function () {
 		$("#topicList").empty();
 		getMessage(parseInt($(this).attr("category")));
 		startPage = parseInt($(this).attr("category"));
@@ -68,20 +64,21 @@ $(document).ready(function() {
 	});
 });
 
-
-$("#search_button").bind('touchstart mousedown', function() {
+/*
+$("#search_button").bind('touchend', function() {
 	$("#search_text").toggle();
 });
 
 
-$("#personal_button").bind('touchstart mousedown', function() {
+$("#personal_button").bind('touchend', function() {
 	var curaddress = window.location.href.substr(0,(window.location.href.indexOf("html/") + 5));
 	window.location.href = curaddress + "setting.html";
 	
 	var un_start = document.cookie.indexOf("username=");
-	var un_end=document.cookie.indexOf(";",c_start)
+	var un_end=document.cookie.indexOf(";",c_start);
 	
 });
+*/
 
 
 

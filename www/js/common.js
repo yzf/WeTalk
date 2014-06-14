@@ -37,10 +37,12 @@ simpleJs.ajaxPost = function(requestUrl, requestData, callBack, errorNotice, asy
 			if(callBack){
 				callBack(result);
 			}else{
+                //alert("common.js find error 1");
 				alert(result.info);
 			}
 		},
 		error: errorNotice || function (XMLHttpRequest, textStatus, errorThrown) {
+            //alert("common.js find error 2");
 		    alert(textStatus);
 		},
 		complete: complete_function || function(){}

@@ -8,7 +8,7 @@ $(document).ready(function() {
 		var requestData = { authkey : authkey };
 		var cb = function(result) {
 			if(parseInt(result.status) == 1) {
-				$("#image").attr("src", hosturl+result.data.icon.url);
+				$("#image").attr("src", hosturl + result.data.icon.url);
                 $("#name").html(result.data.name);
 				$("#info").html(result.data.username);      // account email
 			}
@@ -23,14 +23,33 @@ $(document).ready(function() {
 	getUserInfo(authkey);
 });
 
+/*
 // go back
-$("#goback").bind('touchstart mousedown', function() {
+$("#goback").bind('touchend', function() {
     window.history.back();
 });
-
-/*
-// for logout
-$("#logout").bind('tap', function() {
-	navigator.app.exitApp();
-});
 */
+
+
+// for logout
+$("#logout").bind('touchend', function() {
+	var authkey = simpleJs.getCookie(simpleJs.seesionid);
+	var logout = function(authkey) {
+		var requestUrl = hosturl + "logout/";
+		var requestData = { authkey : authkey }; 
+		var cb = function(result) {
+			if(parseInt(result.status) == 1) {
+				simpleJs.fuzzyRedirect("login");
+			}
+			else {
+				alert(result.info);
+			}
+		};
+
+		simpleJs.ajaxPost(requestUrl, requestData, cb);
+	};
+	
+	localStorage.removeItem("authkey");
+	logout(authkey);
+	//navigator.app.exitApp();
+});

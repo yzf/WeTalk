@@ -25,12 +25,15 @@ $(document).ready(function(){
 								comments.push('<div class="source-talk left">');
 									comments.push('<div class="topic">');	
 										comments.push('<a href="weTalk.html?spitlotID=' + result.cor_spots[i].id + '" rel="external">');
-										comments.push('<img src="' + result.cor_spots[i].imgs.url + '">');
+										for(var j = 0; j < result.cor_spots[i].imgs_count; j++) {
+											comments.push('<img src="' + hosturl + result.cor_spots[i].imgs[j].url + '">');
+										}
 										comments.push('<div class="itemcontent">');
 											comments.push('<h3>' + result.cor_spots[i].title + '</h3>');
 											comments.push('<p>' + result.cor_spots[i].content + '</p>');
 										comments.push('</div>');
-			                            comments.push('<span class="ui-li-count heart">&hearts;' + result.cor_spots[i].up + '</span>');		
+			                            comments.push('<span class="ui-li-count heart">&hearts;' + result.cor_spots[i].up + '</span>');	
+			                            comments.push('<br />');	
 			                            comments.push('<span class="ui-li-count talk">T' + result.cor_spots[i].comments_count + '</span>');
 			                        comments.push('</div>');
 			                    comments.push('</div>');   
@@ -139,8 +142,9 @@ $(document).ready(function(){
 	}
 });
 
-
+/*
 // go back
-$("#goback").bind('touchstart mousedown', function() {
+$("#goback").bind('touchend', function() {
     window.history.back();
 });
+*/

@@ -32,12 +32,14 @@ def spot_list(request):
         start = int(request.REQUEST['start'])
         end = int(request.REQUEST['end'])
 
-        data['count'] = Topic.objects.get(id=topic_id).spots.count()
+        topic = Topic.objects.get(id=topic_id)
+        data['count'] = topic.spots.count()
         sp_list = Topic.objects.get(id=topic_id).spots.all()[start:end]
         data['data'] = []
         for sp in sp_list:
             data['data'].append(sp.toJsonFormat())
 
+        data['topic'] = topic.toJsonFormat()
         data['status'] = 1
         data['info'] = 'ok'
     except Exception as e:

@@ -50,7 +50,7 @@ class Message(models.Model):
         ret['from_user'] = self.from_user.toJsonFormat()
         ret['is_read'] = self.is_read
         ret['content'] = self.content
-        ret['create_time'] = self.create_time
+        ret['create_time'] = str(self.create_time)
         return ret
 
 
@@ -120,6 +120,7 @@ class Spot(models.Model):
         ret['creator'] = self.creator.toJsonFormat()
         ret['create_time'] = str(self.create_time)
         ret['title'] = self.title
+        ret['imgs_count'] = self.imgs.all().count()
         ret['imgs'] = []
         for img in self.imgs.all():
             ret['imgs'].append(img.toJsonFormat())

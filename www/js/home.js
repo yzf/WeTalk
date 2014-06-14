@@ -55,8 +55,9 @@ $(document).ready(function() {
 		
 });
 
-
+/*
 // go back
-$("#goback").bind('touchstart mousedown', function() {
+$("#goback").bind('touchend', function() {
     window.history.back();
 });
+*/

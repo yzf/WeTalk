@@ -32,7 +32,10 @@ $("#search").bind('change', function(){
 	getMessage(title);
 });
 
+/*
 // go back
-$("#goback").bind('touchstart mousedown', function() {
-    window.history.back();
+$("#goback").bind('touchend', function() {
+    //window.history.back();
+    simpleJs.fuzzyRedirect('discover');
 });
+*/

@@ -42,7 +42,7 @@ $(document).ready(function() {
 				// ÆÀÂÛ
 				var comment_ = [];
 				for(var i = 0; i < result.data.comments.length; i++) {
-					comment_.push('<li><a href="#" >');
+					comment_.push('<li data-icon="false"><a href="#" >');
 						comment_.push('<div class="we-talk-style-itemshow">');
 							comment_.push('<div class="maincontent">');
 								comment_.push('<div class="talker-info">');
@@ -81,7 +81,7 @@ $(document).ready(function() {
 });
 
 // "dian zan" which also the same as addup the heart_num	
-$("#heart_num").bind('touchstart mousedown', function() {
+$("#heart_num").bind('touchend', function() {
 	var addUp = function(id) {
 		var requestUrl = hosturl + "add_up/";
 		var requestData = { id : id };
@@ -106,7 +106,7 @@ $("#heart_num").bind('touchstart mousedown', function() {
 
 
 // add comment
-$("#add_comment").bind("touchstart mousedown", function() {
+$("#add_comment").bind('touchend', function() {
 	var content = $("#Text1").val();
 	//var create_time = new Date();
 	
@@ -142,7 +142,7 @@ $("#add_comment").bind("touchstart mousedown", function() {
 				// do not need to get data from database, just use the input one
 				var new_comment = [];
 				
-				new_comment.push('<li><a href="#" >');
+				new_comment.push('<li data-icon="false"><a href="#" >');
 					new_comment.push('<div class="we-talk-style-itemshow">');
 						new_comment.push('<div class="maincontent">');
 							new_comment.push('<div class="talker-info">');
@@ -177,7 +177,9 @@ $("#add_comment").bind("touchstart mousedown", function() {
 	addComment(spitlotID); 
 });
 
+/*
 // go back
-$("#goback").bind('touchstart mousedown', function() {
+$("#goback").bind('touchend', function() {
     window.history.back();
 });
+*/

@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
 from models import *
-import json, util
+import json, string, random, util
 
 def register(request):
     '''
@@ -153,9 +153,22 @@ def user_update(request):
             user_.intro = infoText
         if infoType == '3':
             user_.interest = infoText
-        print user_.name
+        if infoType == '4':
+            # 解码images并保存到数据库，及关联到new_spot
+            img_name = ''.join([random.choice(string.ascii_letters + string.digits) \
+                           for i in range(15)])
+            img_url = 'resource/images/' + img_name + '.png'
+            #pic = cStringIO.StringIO()
+            #image_string = cStringIO.StringIO(base64.b64decode(infoText))
+            imgData = base64.b64decode(infoText)
+            leniyimg = open(img_url,'wb')
+            leniyimg.write(imgData)
+            leniyimg.close()
+            #image.save(pic, il.format, quality=100)
+            #user_.icon = image
+            #pic.seek(0)
         user_.save()
-
+        
         data['user'] = user_.toJsonFormat()
         data['status'] = 1
         data['info'] = 'ok'
@@ -202,6 +215,8 @@ def get_message_detail(request):
     try:
         messageID = request.REQUEST['messageID']
         message = Message.objects.get(id=messageID)
+        message.is_read = True
+        message.save()
         data['message'] = message.toJsonFormat()
         data['status'] = 1
         data['info'] = 'ok'
