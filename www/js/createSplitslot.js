@@ -53,12 +53,16 @@ $(document).ready(function() {
 
 	// “Capture Photo”按钮点击事件触发函数
 	function capturePhoto() {
-
+		alert('使用摄像头拍照');
 		// 使用设备上的摄像头拍照，并获得Base64编码字符串格式的图像
 		navigator.camera.getPicture(onPhotoDataSuccess, onFail, {			
-			encodingType : Camera.EncodingType.JPEG,
-			destinationType : destinationType.DATA_URL,
-			quality : 75
+			// encodingType : Camera.EncodingType.JPEG,
+			// destinationType : destinationType.DATA_URL,
+			// quality : 75
+			quality : 80,
+            encodingType : Camera.EncodingType.JPEG,
+            sourceType : Camera.PictureSourceType.CAMERA,
+            destinationType : destinationType.DATA_URL
 		});
 	}
 
@@ -67,7 +71,7 @@ $(document).ready(function() {
 
 		// 使用设备上的摄像头拍照，并获得Base64编码字符串格式的可编辑图像
 		navigator.camera.getPicture(onPhotoURISuccess, onFail, {
-			quality : 20,			
+			quality : 20,	
 			destinationType : destinationType.FILE_URI,
 			allowEdit : true
 		});

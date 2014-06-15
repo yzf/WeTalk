@@ -32,8 +32,9 @@ def topic_list(request):
         start = int(request.REQUEST['start'])
         end = int(request.REQUEST['end'])
 
-        data['count'] = Topic.objects.filter(category=cg).count()
+        #data['count'] = Topic.objects.filter(category=cg).count()
         tp_list = Topic.objects.filter(category=cg).order_by('id')[start:end]
+        data['count'] = tp_list.count()
         data['data'] = []
         for tp in tp_list:
             data['data'].append(tp.toJsonFormat())

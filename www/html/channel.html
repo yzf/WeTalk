@@ -9,17 +9,15 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     -->
 
+    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.mobile-1.4.2.min.js"></script>
+	<script type="text/javascript" src="../cordova.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+
     <script type="text/javascript">
         if(checkLogin())
             return;
-    </script>   
-
-    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../js/jquery.mobile-1.4.2.min.js"></script>
-    <!--
-	<script type="text/javascript" src="cordova.js"></script>-->
-    <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript" src="../js/channel.js"></script>
+    </script> 
 
     <link rel="stylesheet" type="text/css" href="../css/jquery.mobile-1.4.2.min.css" />
     <link rel="stylesheet" type="text/css" href="../css/index.css" />
@@ -60,7 +58,7 @@
             <ul id="topicList" data-role="listview" data-inset="true" class="we-talk-style-list clear topic-list">
             </ul>
 
-            <a href="javascript:void(0);" id="logout" class="inputbox-button" data-role="button" data-inline="false" data-theme="b">加载更多</a>
+            <a href="javascript:void(0);" id="loadMore" class="inputbox-button" data-role="button" data-inline="false" data-theme="b">加载更多</a>
 
         </div>
 
@@ -84,6 +82,6 @@
         </div>
 
     </div>
-
+    <script type="text/javascript" src="../js/channel.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var cur = 0;
-	var len = 10;
+	var len = 3;
 	var getMessage = function(cgy) {
 		var requestData = {
             category : cgy,
@@ -11,11 +11,9 @@ $(document).ready(function() {
 		var requestUrl = hosturl + "topic_list/";
 		
         var cb = function (result, requestData) {
-			cur += length;
 			if (result.status == "1" || result.status == 1) {
 				var html = [];
 				for(var i = 0; i < result.count; i++) {
-					//result.data[i] = eval(result.data[i]);
 					html.push('<li><a href="spitslot.html?topicID=' + result.data[i].id + '" rel="external">');
 						html.push('<span class="topic-tittle">' + result.data[i].title + '</span>');
 						html.push('<span class="ui-li-count">' + result.data[i].spots_count + '</span>');
@@ -43,6 +41,7 @@ $(document).ready(function() {
 	
 	$("#listV li a").bind('touchend', function () {
 		$("#topicList").empty();
+		cur = 0;
 		getMessage(parseInt($(this).attr("category")));
 		startPage = parseInt($(this).attr("category"));
 	});
@@ -51,6 +50,7 @@ $(document).ready(function() {
 		if(startPage >= 0) {
 			startPage--;
 			$("#topicList").empty();
+			cur = 0;
 			getMessage(startPage);
 		}
 	});
@@ -59,10 +59,40 @@ $(document).ready(function() {
 		if(startPage < 4) {
 			startPage++;
 			$("#topicList").empty();
+			cur = 0;
 			getMessage(startPage);
 		}
 	});
+
+	$("#loadMore").bind('mousedown', function() {
+		cur += len;
+		$("#topicList").empty();
+		getMessage(startPage);
+//		simpleJs.fuzzyRedirect("channel");
+	});
+
+	document.addEventListener("deviceready", onDeviceReady, false); 
+	function onDeviceReady() {
+		document.addEventListener("backbutton", onBackKeyDown, false); 
+		//BackButton按钮
+		function onBackKeyDown() {
+			//alert("call onBackKeyDown");
+		    //navigator.app.backHistory();
+		    // if(cur >= 0) {
+		    	cur -= len;
+		    	if(cur >= 0) {
+		    		$("#topicList").empty();
+					getMessage(startPage);
+				}
+		    // }
+		    else {
+		    	navigator.app.backHistory();
+		    }
+		}
+	}
 });
+
+
 
 /*
 $("#search_button").bind('touchend', function() {

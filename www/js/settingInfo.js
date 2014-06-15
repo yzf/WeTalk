@@ -8,7 +8,7 @@ $(document).ready(function() {
 	//图片来源
 	var destinationType;
 	//设置返回值的格式
-
+ 
 	// 等待PhoneGap连接设备
 	document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -26,11 +26,15 @@ $(document).ready(function() {
 	
 	// “Capture Photo”按钮点击事件触发函数
 	function capturePhoto() {
+        alert('使用摄像头拍照');
 		// 使用设备上的摄像头拍照，并获得Base64编码字符串格式的图像
 		navigator.camera.getPicture(onPhotoDataSuccess, onFail, {			
-			encodingType : Camera.EncodingType.JPEG,
-			destinationType : destinationType.DATA_URL,
-			quality : 75
+			//encodingType : Camera.EncodingType.JPEG,
+			//destinationType : destinationType.DATA_URL,
+			quality : 80,
+            encodingType : Camera.EncodingType.JPEG,
+            sourceType : Camera.PictureSourceType.CAMERA,
+            destinationType : destinationType.DATA_URL
 		});
 	}
 
@@ -82,7 +86,7 @@ $(document).ready(function() {
         $("#info_type").html("兴趣");
     }
     else if (infoType == 4) {
-    	$("#info_type").html("头像（点击头像修改）");
+    	$("#info_type").html("头像");
     	$("#inputBox").hide();
     	$("#image").bind('taphold', function() {
     		capturePhoto();    		
@@ -90,6 +94,11 @@ $(document).ready(function() {
     	$("#image").bind('tap', function() {
     		getPhoto(pictureSource.SAVEDPHOTOALBUM);
     	});
+        // $("#image").bind('tap', function() {
+        //     getPhoto(pictureSource.SAVEDPHOTOALBUM);
+        // }).bind('taphold', function() {
+        //     capturePhoto();  
+        // });
     }
     else{
         alert("Info type is " + infoType);

@@ -1,4 +1,4 @@
-$("#loginButton").bind('touchend', function () {
+$("#loginButton").bind('mousedown', function () {
 
 	var account_ = $("#loginAccountInput").val();
 	var password_ = $("#loginPasswordInput").val();
