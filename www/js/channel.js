@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var cur = 0;
-	var len = 3;
+	var len = 5;
 	var getMessage = function(cgy) {
 		var requestData = {
             category : cgy,

@@ -128,6 +128,11 @@ $(document).ready(function() {
 			curDate += now_.getMinutes() + ":";
 			curDate += now_.getSeconds();
 
+			if(imgContainer.length == 0) {
+				alert("无图无真相");
+				return;
+			}
+
 			// 上传的数据
 			var sendData = {
 				authkey : authkey,
@@ -140,7 +145,7 @@ $(document).ready(function() {
 			
 			var cb = function(result) {
 				if(parseInt(result.status) == 1) {
-					simpleJs.fuzzyRedirect("weTalk", '?spitlotID=' + result.spotID);
+					simpleJs.fuzzyRedirect("weTalk", '?spitlotID=' + result.spotID); 
 				}
 				else {
 					alert(result.info);

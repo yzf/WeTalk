@@ -68,8 +68,9 @@ def discover_topic(request):
         user_ = User.objects.get(id=cur_user['id'])
 
         # set iTopic list and iTopic count
-        iTopic_list_ = user_.focus.all()
-        iTopic_count_ = user_.focus.count()
+        #iTopic_list_ = user_.focus.all()
+        iTopic_list_ = Topic.objects.filter(category=user_.interest)
+        iTopic_count_ = iTopic_list_.count()
         data['iTopic_count'] = iTopic_count_
         data['iTopic_list'] = []
         for it in iTopic_list_:
@@ -79,7 +80,8 @@ def discover_topic(request):
         # recommend topic according to topic category 
         # if this is empty, recommend the topic created by admin@admin.com
         system_user = User.objects.get(username='admin@admin.com')
-        rTopic_list_ = Topic.objects.filter(category=user_.interest)
+        #rTopic_list_ = Topic.objects.filter(category=user_.interest)
+        rTopic_list_ = Topic.objects.filter(creator=system_user)
         rTopic_count_ = rTopic_list_.count()
         print rTopic_count_
         
@@ -157,8 +159,9 @@ def createTopic(request):
         title = request.REQUEST['title']
         begin_time = request.REQUEST['startTime']
         end_time = request.REQUEST['endTime']
+        category = request.REQUEST['category']
 
-        new_topic = Topic(creator=user_, create_time=create_time, category="", title=title, begin_time=begin_time, end_time=end_time)
+        new_topic = Topic(creator=user_, create_time=create_time, category=category, title=title, begin_time=begin_time, end_time=end_time)
         new_topic.save()
 
         data['topicID'] = new_topic.id

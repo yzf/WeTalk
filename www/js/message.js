@@ -13,7 +13,7 @@ $(document).ready(function() {
                             unread_messages_.push('<div>');
                                 unread_messages_.push('<span class="h2">' + result.unread_messages[i].from_user.name + '</span>');
                                 //unread_messages_.push('<br/>');
-                                unread_messages_.push('<span class="time">' + result.unread_messages[i].create_time + '</span>');
+                            //    unread_messages_.push('<span class="time">' + result.unread_messages[i].create_time + '</span>');
                             unread_messages_.push('</div>');
                             unread_messages_.push('<p>' + result.unread_messages[i].content + '</p>');
                         unread_messages_.push('</a>');
@@ -31,8 +31,8 @@ $(document).ready(function() {
                             read_messages_.push('<img src="' + hosturl + result.read_messages[i].to_user.icon.url + '">');
                             read_messages_.push('<div>');
                                 read_messages_.push('<span class="h2">' + result.read_messages[i].from_user.name + '</span>');
-                                //read_messages_.push('<br/>');
-                                read_messages_.push('<span class="time">' + result.read_messages[i].create_time + '</span>');
+                            //    read_messages_.push('<br />');
+                            //    read_messages_.push('<span class="time">' + result.read_messages[i].create_time + '</span>');
                             read_messages_.push('</div>');
                             read_messages_.push('<p>' + result.read_messages[i].content + '</p>');
                         read_messages_.push('</a>');

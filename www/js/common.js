@@ -4,7 +4,9 @@ var simpleJs = {
 
 
 // 这个会因为所处网络群而改变，故需要实时人手更新
-var hosturl = "http://adling.info:8000/";
+//var hosturl = "http://adling.info:8000/";
+// mysql root password is 'j'
+var hosturl = "http://192.168.0.100:8000/";
 
 // JS生成ajax发送的url，为了统一，方便修改
 simpleJs.getURL = function (action) {

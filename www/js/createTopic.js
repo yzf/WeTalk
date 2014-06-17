@@ -27,7 +27,8 @@ $(document).ready(function() {
 				create_time : curDate,
 				title: $.trim($("#topicTitle").val()),
 				startTime: $("#startTime").val(),
-				endTime: $("#endTime").val()
+				endTime: $("#endTime").val(),
+				category: $("#topicType").val() 
 			};
 			
 			var cb = function(result) {

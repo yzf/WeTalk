@@ -118,12 +118,11 @@ def home_ownComment(request):
         data['cor_spots'] = []
         for cl in comment_list:
             data['comment_list'].append(cl.toJsonFormat())
-            print 'comment_list'
-            # here is the problem
             cor_spot = cl.spot_set.all()       # get the first one, in fact there is only one, but the return is a struct of arrary
+            cor_spot_ = None
             for cors in cor_spot:
-                print 'cor_spots'
-                data['cor_spots'].append(cors.toJsonFormat(show_comment=True))
+                cor_spot_ = cors
+            data['cor_spots'].append(cor_spot_.toJsonFormat(show_comment=True))
 
         data['status'] = 1
         data['info'] = 'ok'
@@ -148,8 +147,7 @@ def home_receiveComment(request):
         data['spots_count'] = own_spots.count()
         data['cor_spots'] = []
         for cs in own_spots:
-            # here need to cancl the comment created by user_, but can not do this here
-            data['cor_spots'].append(cs.toJsonFormat(show_comment=True, start=0, end=10))   # get the first 10 
+            data['cor_spots'].append(cs.toJsonFormat(show_comment=True, start=0, end=10))   
 
         data['status'] = 1
         data['info'] = 'ok'

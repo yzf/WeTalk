@@ -108,7 +108,7 @@ def get_Topic(request):
         spotID = request.REQUEST['spitlotID']
         spot_ = Spot.objects.get(id=spotID)
         topicList = spot_.topic_set.all()   # acttrually only one
-        topicID = ''
+        topicID = -1
         for tl in topicList:
             topicID = tl.id
         data['topicID'] = topicID

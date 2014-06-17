@@ -28,7 +28,7 @@ $(document).ready(function() {
 				$("#content_text").html(result.data.content);
 				var original_ = [];
 				for(var i = 0; i < result.data.imgs.length; i++) {
-					original_.push('<img src="' + img_url + result.data.imgs[i].url + '" />');
+					original_.push('<img height="150px" width="150px" src="' + img_url + result.data.imgs[i].url + '" />');
 				}
 				original_ = original_.join("");
 				$("#original_text").append(original_);
@@ -172,17 +172,22 @@ $("#add_comment").bind('touchend', function() {
 	addComment(spitlotID); 
 });
 
-/*
-// go back
+
+// go back 
 $("#goback").bind('touchend', function() {
-	var topicID = '';
+	var topicID = "";
 	var goBackTopic = function(spitlotID) {
-		var requestUrl = hosturl + "get_Topic/";
+		var requestUrl = hosturl + "get_Topic/";	// view_spot.py
 		var requestData = { spitlotID : spitlotID };
 		var cb = function(result) {
 			if(parseInt(result.status) == 1) {
-				topicID = result.topicID;
-				alert(topicID);
+				topicID += result.topicID;
+				if(topicID != "") {
+			    	simpleJs.fuzzyRedirect("spitslot", "?topicID=" + topicID);
+			    }
+			    else {
+			    	window.history.back();
+			    }
 			}
 			else {
 				alert(result.info);
@@ -194,8 +199,5 @@ $("#goback").bind('touchend', function() {
 
     var spitlotID = parseInt(window.location.href.substr((window.location.href.indexOf("=") + 1)));
     goBackTopic(spitlotID);
-    if(topicID != '') {
-    	simpleJs.fuzzyRedirect("spitslot", "?topicID=" + topicID);
-    }
+
 });
-*/
