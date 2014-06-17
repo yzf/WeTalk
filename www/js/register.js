@@ -1,11 +1,11 @@
 $("#registerButton").bind('touchend', function() {
-	// ÅĞ¶ÏµÇÂ½½çÃæÊäÈëµÄÕËºÅºÍÃÜÂëÊÇ·ñ´æÔÚÎª¿Õ
+	// ï¿½Ğ¶Ïµï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ËºÅºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½
 	var account_ = $("#registerAccountInput").val();
 	var password_ = $("#registerPasswordInput").val();
 	var confirm_pwd = $("#registerConfirmPassword").val();
 	
-	alert(account_);
-	alert(password_);
+	//alert(account_);
+	//alert(password_);
 
 	if(account_.length == 0) {
 		alert("Account number is empty!");
@@ -20,13 +20,13 @@ $("#registerButton").bind('touchend', function() {
 		return;
 	}
 	
-	// ÅĞ¶ÏÓÃ»§ÃûÊÇ·ñÒ»¸öÓÊÏä£¬ÒÔÏÂÊÇÓÊÏäµÄÕıÔò±í´ïÊ½
+	// ï¿½Ğ¶ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
 	var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
 	if(!reg.test(account_)) {
 		alert("Account should be an email address!");
 		return;
 	}
-	// ÃÜÂë²»Ò»ÖÂ
+	// ï¿½ï¿½ï¿½ë²»Ò»ï¿½ï¿½
 	if(password_ != confirm_pwd) {
 		alert("Password confirm failed!");
 		return;
@@ -37,19 +37,19 @@ $("#registerButton").bind('touchend', function() {
 		return;
 	}
 	
-	// °ÑÊı¾İ·¢¸øÊı¾İ¿â£¬»ñÈ¡·µ»ØµÄĞÅÏ¢
+	// ï¿½ï¿½ï¿½ï¿½İ·ï¿½ï¿½ï¿½ï¿½ï¿½İ¿â£¬ï¿½ï¿½È¡ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½Ï¢
 	var tryRegister = function(usrn, pwd) {
-		// Ïò·şÎñÆ÷ÇëÇóÊ±·¢ËÍ¸ø·şÎñÆ÷µÄÊı¾İ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		var requestData = {
             username : usrn,
 			password : pwd
         };
-        // ÇëÇóÊı¾İµÄµØÖ·
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İµÄµï¿½Ö·
 		var requestUrl = hosturl + "register/";
 		
 		var cb = function(result) {
 			if(result.status == 1) {
-			    // µ±Ç°µØÖ·
+			    // ï¿½ï¿½Ç°ï¿½ï¿½Ö·
 			    simpleJs.setCookie(simpleJs.seesionid, result[simpleJs.seesionid]);			    
 			    simpleJs.fuzzyRedirect("home");
 			}
@@ -60,7 +60,7 @@ $("#registerButton").bind('touchend', function() {
 				
 		};
 		
-		// Ïò·şÎñ·¢ËÍÇëÇó£¬²ÎÊı£ºµØÖ·¡¢·¢¸ø·şÎñÆ÷µÄÊı¾İ¡¢»Øµ÷º¯Êı
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó£¬²ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ¡ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
         simpleJs.ajaxPost(requestUrl, requestData, cb);
 	};
 	
