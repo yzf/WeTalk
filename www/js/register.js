@@ -1,4 +1,4 @@
-$("#registerButton").bind('touchend', function() {
+$("#registerButton").bind('click', function() {
 
 	var account_ = $("#registerAccountInput").val();
 	var password_ = $("#registerPasswordInput").val();
@@ -36,9 +36,19 @@ $("#registerButton").bind('touchend', function() {
 	
 
 	var tryRegister = function(usrn, pwd) {
+		var now_ = new Date();
+		var create_time = "";
+		create_time += now_.getFullYear() + "-";
+		create_time += (now_.getMonth() + 1) + "-";
+		create_time += now_.getDate() + " ";
+		create_time += now_.getHours() + ":";
+		create_time += now_.getMinutes() + ":";
+		create_time += now_.getSeconds();
+
 		var requestData = {
             username : usrn,
-			password : pwd
+			password : pwd,
+			create_time : create_time
         };
 
 		var requestUrl = hosturl + "register/";

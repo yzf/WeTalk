@@ -38,9 +38,10 @@ def register(request):
         auth.data = json.dumps(user_data)
         auth.save()
 
+        create_time = request.REQUEST['create_time']
         # system send a welcome message to user
         system_user = User.objects.get(username="admin@admin.com")
-        welcome = Message(to_user=user, from_user=system_user, is_read=False, content="Welcome to WeTalk!")
+        welcome = Message(to_user=user, from_user=system_user, is_read=False, content="Welcome to WeTalk!", create_time=create_time)
         welcome.save()
 
         data['authkey'] = auth.key
