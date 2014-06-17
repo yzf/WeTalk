@@ -19,7 +19,7 @@ $(document).ready(function() {
 				creator_.push('<div class="user">');
 					creator_.push('<span class="h3">' + result.data.creator.name + '</span>');
 					creator_.push('<br />');
-					creator_.push('<span class="time">' + result.data.create_time + '</span>');
+					creator_.push('<span class="time">' + result.data.create_time.substr(0, 19) + '</span>');
 				creator_.push('</div>');
 
 				creator_ = creator_.join("");
@@ -33,28 +33,28 @@ $(document).ready(function() {
 				original_ = original_.join("");
 				$("#original_text").append(original_);
 				
-				// µãÔÞºÍÆÀÂÛÊý
+				// ï¿½ï¿½ï¿½Þºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				$("#heart_num").html(result.data.up);
 				$("#comment_num").html(result.data.comments.length);
 				
 				var comment_ = [];
 				for(var i = 0; i < result.data.comments.length; i++) {
 					comment_.push('<li data-icon="false"><a href="#" >');
-						comment_.push('<div class="we-talk-style-itemshow">');
-							comment_.push('<div class="maincontent">');
-								comment_.push('<div class="talker-info">');
-									comment_.push('<img src="' + img_url + result.data.comments[i].creator.icon.url + '" />');
-									comment_.push('<div class="user">');
-										comment_.push('<span class="h3">' + result.data.comments[i].creator.name + '</span>');
-										comment_.push('<br />');
-										comment_.push('<span class="time">' + result.data.comments[i].create_time + '</span>');
-									comment_.push('</div>');
-								comment_.push('</div>');
-								comment_.push('<div class="show-info">');
-									comment_.push('<p>' + result.data.comments[i].content + '</p>');
-								comment_.push('</div>');
-							comment_.push('</div>');
-						comment_.push('</div>');
+					//comment_.push('		<div class="we-talk-style-itemshow ">');
+					comment_.push('			<div class="maincontent">');
+					comment_.push('				<div class="talker-info">');
+					comment_.push('					<img src="' + img_url + result.data.comments[i].creator.icon.url + '" />');
+					comment_.push('					<div class="user">');
+					comment_.push('						<span class="h3">' + result.data.comments[i].creator.name + '</span>');
+					comment_.push('						<br />');
+					comment_.push('						<span class="time">' + result.data.comments[i].create_time.substr(0, 19) + '</span>');
+					comment_.push('					</div>');
+					comment_.push('				</div>');
+					comment_.push('				<div class="show-info">');
+					comment_.push('					<p>' + result.data.comments[i].content + '</p>');
+					comment_.push('				</div>');
+					comment_.push('			</div>');
+					//comment_.push('		</div>');
 					comment_.push('</a></li>');
 				}
 				
@@ -146,7 +146,7 @@ $("#add_comment").bind('touchend', function() {
 								new_comment.push('<div class="user">');
 									new_comment.push('<span class="h3">' + result.comment.creator.name + '</span>');
 									new_comment.push('<br />');
-									new_comment.push('<span class="time">' + result.comment.create_time + '</span>');
+									new_comment.push('<span class="time">' + result.comment.create_time.substr(0, 10) + '</span>');
 								new_comment.push('</div>');
 							new_comment.push('</div>');
 							new_comment.push('<div class="show-info">');

@@ -395,14 +395,14 @@
 /*************************** talk *****************************/
 .we-talk-style .we-talk-style-itemshow  {
 	background-color: #EEE;
-    margin: 0.1em 0.2em 1.5em 0.2em;
+    padding: 0.1em 0.2em 0.5em 0.2em;
     border: 1px solid #DDD;
 	-webkit-border-radius: .3em !important;
 	-moz-border-radius: .3em !important;
     overflow: hidden;
 }
 
-    .we-talk-style .we-talk-style-itemshow .maincontent {
+    .we-talk-style .maincontent {
         padding: 0.8em 0.8em 0 0.8em;
     }
 

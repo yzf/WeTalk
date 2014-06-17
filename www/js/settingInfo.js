@@ -88,17 +88,17 @@ $(document).ready(function() {
     else if (infoType == 4) {
     	$("#info_type").html("头像");
     	$("#inputBox").hide();
-    	$("#image").bind('taphold', function() {
+    	/*$("#image").bind('taphold', function() {
     		capturePhoto();    		
     	});
     	$("#image").bind('tap', function() {
     		getPhoto(pictureSource.SAVEDPHOTOALBUM);
-    	});
-        // $("#image").bind('tap', function() {
-        //     getPhoto(pictureSource.SAVEDPHOTOALBUM);
-        // }).bind('taphold', function() {
-        //     capturePhoto();  
-        // });
+    	});*/
+        $("#image").bind('tap', function() {
+            getPhoto(pictureSource.SAVEDPHOTOALBUM);
+        }).bind('taphold', function() {
+            capturePhoto();  
+        });
     }
     else{
         alert("Info type is " + infoType);

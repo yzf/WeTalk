@@ -48,7 +48,7 @@ $("#registerButton").bind('touchend', function() {
 		var requestUrl = hosturl + "register/";
 		
 		var cb = function(result) {
-			if(result.status == 1) {
+			if(result.status == 1 || result.status == "1") {
 			    // ��ǰ��ַ
 			    simpleJs.setCookie(simpleJs.seesionid, result[simpleJs.seesionid]);			    
 			    simpleJs.fuzzyRedirect("home");
