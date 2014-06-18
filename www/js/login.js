@@ -1,4 +1,4 @@
-$("#loginButton").bind('mousedown', function () {
+$("#loginButton").bind('touchend', function () {
 
 	var account_ = $("#loginAccountInput").val();
 	var password_ = $("#loginPasswordInput").val();
@@ -34,7 +34,7 @@ $("#loginButton").bind('mousedown', function () {
         };
 
 		var requestUrl = hosturl + "login/";
-		
+	
 		var cb = function(result) {
 		    if (result.status == 1) {
 		        simpleJs.setCookie(simpleJs.seesionid, result[simpleJs.seesionid])	
@@ -47,10 +47,10 @@ $("#loginButton").bind('mousedown', function () {
 			}
 				
 		};
-		
+	
         simpleJs.ajaxPost(requestUrl, requestData, cb);
 	};
-	
+
 	tryLogin(account_, password_);
 
 });

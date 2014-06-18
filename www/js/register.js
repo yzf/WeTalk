@@ -1,4 +1,4 @@
-$("#registerButton").bind('click', function() {
+$("#registerButton").bind('touchend', function() {
 
 	var account_ = $("#registerAccountInput").val();
 	var password_ = $("#registerPasswordInput").val();
@@ -44,7 +44,7 @@ $("#registerButton").bind('click', function() {
 		create_time += now_.getHours() + ":";
 		create_time += now_.getMinutes() + ":";
 		create_time += now_.getSeconds();
-
+		
 		var requestData = {
             username : usrn,
 			password : pwd,
